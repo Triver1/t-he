@@ -1,0 +1,1175 @@
+origin_o_r:
+    x: 0
+    'y': 0
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: o_r
+        name: origin_o_r
+        tags:
+            - helper
+        zone:
+            columns:
+                o: null
+            rows:
+                r:
+                    tags:
+                        - helper
+            name: origin
+        col:
+            rows: {}
+            key: {}
+            name: o
+        row: r
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+pinky_bottom:
+    x: -31.394
+    'y': -76.18
+    r: -10
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_bottom
+        name: pinky_bottom
+        tags:
+            - alpha
+        out_net: K_PINKY_BOTTOM
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: pinky_bottom
+                    out_net: K_PINKY_BOTTOM
+                home:
+                    name: pinky_home
+                    out_net: K_PINKY_HOME
+                    adjust:
+                        shift:
+                            - -0.181
+                            - -0.032
+                top:
+                    name: pinky_top
+                    out_net: K_PINKY_TOP
+                    adjust:
+                        shift:
+                            - -0.362
+                            - -0.063
+            name: pinky
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+pinky_home:
+    x: -28.2698091
+    'y': -57.41949580000001
+    r: -10
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - -0.181
+                - -0.032
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_home
+        name: pinky_home
+        tags:
+            - alpha
+        out_net: K_PINKY_HOME
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: pinky_bottom
+                    out_net: K_PINKY_BOTTOM
+                home:
+                    name: pinky_home
+                    out_net: K_PINKY_HOME
+                    adjust:
+                        shift:
+                            - -0.181
+                            - -0.032
+                top:
+                    name: pinky_top
+                    out_net: K_PINKY_TOP
+                    adjust:
+                        shift:
+                            - -0.362
+                            - -0.063
+            name: pinky
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 0
+pinky_top:
+    x: -25.1454446
+    'y': -38.6580068
+    r: -10
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - -0.362
+                - -0.063
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_top
+        name: pinky_top
+        tags:
+            - alpha
+        out_net: K_PINKY_TOP
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: pinky_bottom
+                    out_net: K_PINKY_BOTTOM
+                home:
+                    name: pinky_home
+                    out_net: K_PINKY_HOME
+                    adjust:
+                        shift:
+                            - -0.181
+                            - -0.032
+                top:
+                    name: pinky_top
+                    out_net: K_PINKY_TOP
+                    adjust:
+                        shift:
+                            - -0.362
+                            - -0.063
+            name: pinky
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+ring_bottom:
+    x: -49.013
+    'y': -59.24
+    r: -4
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_bottom
+        name: ring_bottom
+        tags:
+            - alpha
+        out_net: K_RING_BOTTOM
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: ring_bottom
+                    out_net: K_RING_BOTTOM
+                home:
+                    name: ring_home
+                    out_net: K_RING_HOME
+                    adjust:
+                        shift:
+                            - -0.074
+                            - -0.005
+                top:
+                    name: ring_top
+                    out_net: K_RING_TOP
+                    adjust:
+                        shift:
+                            - -0.147
+                            - -0.009
+            name: ring
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+ring_home:
+    x: -47.758307699999996
+    'y': -40.236230600000006
+    r: -4
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - -0.074
+                - -0.005
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_home
+        name: ring_home
+        tags:
+            - alpha
+        out_net: K_RING_HOME
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: ring_bottom
+                    out_net: K_RING_BOTTOM
+                home:
+                    name: ring_home
+                    out_net: K_RING_HOME
+                    adjust:
+                        shift:
+                            - -0.074
+                            - -0.005
+                top:
+                    name: ring_top
+                    out_net: K_RING_TOP
+                    adjust:
+                        shift:
+                            - -0.147
+                            - -0.009
+            name: ring
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 0
+ring_top:
+    x: -46.5025481
+    'y': -21.231533500000005
+    r: -4
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - -0.147
+                - -0.009
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_top
+        name: ring_top
+        tags:
+            - alpha
+        out_net: K_RING_TOP
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: ring_bottom
+                    out_net: K_RING_BOTTOM
+                home:
+                    name: ring_home
+                    out_net: K_RING_HOME
+                    adjust:
+                        shift:
+                            - -0.074
+                            - -0.005
+                top:
+                    name: ring_top
+                    out_net: K_RING_TOP
+                    adjust:
+                        shift:
+                            - -0.147
+                            - -0.009
+            name: ring
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+middle_bottom:
+    x: -68.303
+    'y': -47.815
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_bottom
+        name: middle_bottom
+        tags:
+            - alpha
+        out_net: K_MIDDLE_BOTTOM
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: middle_bottom
+                    out_net: K_MIDDLE_BOTTOM
+                home:
+                    name: middle_home
+                    out_net: K_MIDDLE_HOME
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+                top:
+                    name: middle_top
+                    out_net: K_MIDDLE_TOP
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+            name: middle
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+middle_home:
+    x: -68.303
+    'y': -28.763999999999996
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - 0
+                - 0.001
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_home
+        name: middle_home
+        tags:
+            - alpha
+        out_net: K_MIDDLE_HOME
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: middle_bottom
+                    out_net: K_MIDDLE_BOTTOM
+                home:
+                    name: middle_home
+                    out_net: K_MIDDLE_HOME
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+                top:
+                    name: middle_top
+                    out_net: K_MIDDLE_TOP
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+            name: middle
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 0
+middle_top:
+    x: -68.303
+    'y': -9.713999999999997
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust:
+            shift:
+                - 0
+                - 0.001
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_top
+        name: middle_top
+        tags:
+            - alpha
+        out_net: K_MIDDLE_TOP
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: middle_bottom
+                    out_net: K_MIDDLE_BOTTOM
+                home:
+                    name: middle_home
+                    out_net: K_MIDDLE_HOME
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+                top:
+                    name: middle_top
+                    out_net: K_MIDDLE_TOP
+                    adjust:
+                        shift:
+                            - 0
+                            - 0.001
+            name: middle
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+index_bottom:
+    x: -87.353
+    'y': -57.268
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_bottom
+        name: index_bottom
+        tags:
+            - alpha
+        out_net: K_INDEX_BOTTOM
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: index_bottom
+                    out_net: K_INDEX_BOTTOM
+                home:
+                    name: index_home
+                    out_net: K_INDEX_HOME
+                top:
+                    name: index_top
+                    out_net: K_INDEX_TOP
+            name: index
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+index_home:
+    x: -87.353
+    'y': -38.218
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_home
+        name: index_home
+        tags:
+            - alpha
+        out_net: K_INDEX_HOME
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: index_bottom
+                    out_net: K_INDEX_BOTTOM
+                home:
+                    name: index_home
+                    out_net: K_INDEX_HOME
+                top:
+                    name: index_top
+                    out_net: K_INDEX_TOP
+            name: index
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 0
+index_top:
+    x: -87.353
+    'y': -19.168000000000003
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_top
+        name: index_top
+        tags:
+            - alpha
+        out_net: K_INDEX_TOP
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: index_bottom
+                    out_net: K_INDEX_BOTTOM
+                home:
+                    name: index_home
+                    out_net: K_INDEX_HOME
+                top:
+                    name: index_top
+                    out_net: K_INDEX_TOP
+            name: index
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+inner_bottom:
+    x: -106.403
+    'y': -60.316
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_bottom
+        name: inner_bottom
+        tags:
+            - alpha
+        out_net: K_INNER_BOTTOM
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: inner_bottom
+                    out_net: K_INNER_BOTTOM
+                home:
+                    name: inner_home
+                    out_net: K_INNER_HOME
+                top:
+                    name: inner_top
+                    out_net: K_INNER_TOP
+            name: inner
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+inner_home:
+    x: -106.403
+    'y': -41.266000000000005
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_home
+        name: inner_home
+        tags:
+            - alpha
+        out_net: K_INNER_HOME
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: inner_bottom
+                    out_net: K_INNER_BOTTOM
+                home:
+                    name: inner_home
+                    out_net: K_INNER_HOME
+                top:
+                    name: inner_top
+                    out_net: K_INNER_TOP
+            name: inner
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 0
+inner_top:
+    x: -106.403
+    'y': -22.216000000000005
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_top
+        name: inner_top
+        tags:
+            - alpha
+        out_net: K_INNER_TOP
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                bottom:
+                    name: inner_bottom
+                    out_net: K_INNER_BOTTOM
+                home:
+                    name: inner_home
+                    out_net: K_INNER_HOME
+                top:
+                    name: inner_top
+                    out_net: K_INNER_TOP
+            name: inner
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+outer:
+    x: -11.178
+    'y': -71.258
+    r: -10
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_k
+        name: outer
+        tags:
+            - alpha
+        out_net: K_OUTER
+        zone:
+            key:
+                padding: u
+                tags:
+                    - alpha
+            columns:
+                c: null
+            rows:
+                k:
+                    name: outer
+                    out_net: K_OUTER
+            name: outer
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: k
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+thumb1:
+    x: -78.034
+    'y': -78.725
+    r: 0
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_k
+        name: thumb1
+        tags:
+            - thumb
+        out_net: K_THUMB1
+        zone:
+            key:
+                padding: u
+                tags:
+                    - thumb
+            columns:
+                c: null
+            rows:
+                k:
+                    name: thumb1
+                    out_net: K_THUMB1
+            name: thumb1
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: k
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+thumb2:
+    x: -99.12
+    'y': -81.835
+    r: 15
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_k
+        name: thumb2
+        tags:
+            - thumb
+        out_net: K_THUMB2
+        zone:
+            key:
+                padding: u
+                tags:
+                    - thumb
+            columns:
+                c: null
+            rows:
+                k:
+                    name: thumb2
+                    out_net: K_THUMB2
+            name: thumb2
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: k
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+thumb3:
+    x: -118.647
+    'y': -90.435
+    r: 30
+    meta:
+        stagger: 0
+        spread: 19.05
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18.05
+        height: 18.05
+        padding: 19.05
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: c_k
+        name: thumb3
+        tags:
+            - thumb
+        out_net: K_THUMB3
+        zone:
+            key:
+                padding: u
+                tags:
+                    - thumb
+            columns:
+                c: null
+            rows:
+                k:
+                    name: thumb3
+                    out_net: K_THUMB3
+            name: thumb3
+        col:
+            rows: {}
+            key: {}
+            name: c
+        row: k
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0

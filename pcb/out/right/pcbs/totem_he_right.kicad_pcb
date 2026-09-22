@@ -1,0 +1,800 @@
+
+
+(kicad_pcb
+  (version 20240108)
+  (generator "ergogen")
+  (generator_version "4.2.1")
+  (general
+    (thickness 1.6)
+    (legacy_teardrops no)
+  )
+  (paper "A3")
+  (title_block
+    (title "totem_he_right")
+    (date "2026-09-22")
+    (rev "v1.0.0")
+    (company "Unknown")
+  )
+
+  (layers
+    (0 "F.Cu" signal)
+    (31 "B.Cu" signal)
+    (32 "B.Adhes" user "B.Adhesive")
+    (33 "F.Adhes" user "F.Adhesive")
+    (34 "B.Paste" user)
+    (35 "F.Paste" user)
+    (36 "B.SilkS" user "B.Silkscreen")
+    (37 "F.SilkS" user "F.Silkscreen")
+    (38 "B.Mask" user)
+    (39 "F.Mask" user)
+    (40 "Dwgs.User" user "User.Drawings")
+    (41 "Cmts.User" user "User.Comments")
+    (42 "Eco1.User" user "User.Eco1")
+    (43 "Eco2.User" user "User.Eco2")
+    (44 "Edge.Cuts" user)
+    (45 "Margin" user)
+    (46 "B.CrtYd" user "B.Courtyard")
+    (47 "F.CrtYd" user "F.Courtyard")
+    (48 "B.Fab" user)
+    (49 "F.Fab" user)
+  )
+
+  (setup
+    (pad_to_mask_clearance 0.05)
+    (allow_soldermask_bridges_in_footprints no)
+    (pcbplotparams
+      (layerselection 0x00010fc_ffffffff)
+      (plot_on_all_layers_selection 0x0000000_00000000)
+      (disableapertmacros no)
+      (usegerberextensions no)
+      (usegerberattributes yes)
+      (usegerberadvancedattributes yes)
+      (creategerberjobfile yes)
+      (dashed_line_dash_ratio 12.000000)
+      (dashed_line_gap_ratio 3.000000)
+      (svgprecision 4)
+      (plotframeref no)
+      (viasonmask no)
+      (mode 1)
+      (useauxorigin no)
+      (hpglpennumber 1)
+      (hpglpenspeed 20)
+      (hpglpendiameter 15.000000)
+      (pdf_front_fp_property_popups yes)
+      (pdf_back_fp_property_popups yes)
+      (dxfpolygonmode yes)
+      (dxfimperialunits yes)
+      (dxfusepcbnewfont yes)
+      (psnegative no)
+      (psa4output no)
+      (plotreference yes)
+      (plotvalue yes)
+      (plotfptext yes)
+      (plotinvisibletext no)
+      (sketchpadsonfab no)
+      (subtractmaskfromsilk no)
+      (outputformat 1)
+      (mirror no)
+      (drillshape 1)
+      (scaleselection 1)
+      (outputdirectory "")
+    )
+  )
+
+  (net 0 "")
+(net 1 "VCC")
+(net 2 "GND")
+(net 3 "K_PINKY_BOTTOM")
+(net 4 "K_PINKY_HOME")
+(net 5 "K_PINKY_TOP")
+(net 6 "K_RING_BOTTOM")
+(net 7 "K_RING_HOME")
+(net 8 "K_RING_TOP")
+(net 9 "K_MIDDLE_BOTTOM")
+(net 10 "K_MIDDLE_HOME")
+(net 11 "K_MIDDLE_TOP")
+(net 12 "K_INDEX_BOTTOM")
+(net 13 "K_INDEX_HOME")
+(net 14 "K_INDEX_TOP")
+(net 15 "K_INNER_BOTTOM")
+(net 16 "K_INNER_HOME")
+(net 17 "K_INNER_TOP")
+(net 18 "K_OUTER")
+(net 19 "K_THUMB1")
+(net 20 "K_THUMB2")
+(net 21 "K_THUMB3")
+(net 22 "ADC_A")
+(net 23 "SEL0")
+(net 24 "SEL1")
+(net 25 "SEL2")
+(net 26 "Y7")
+(net 27 "ADC_B")
+(net 28 "ADC_C")
+(net 29 "Y4")
+(net 30 "Y5")
+(net 31 "Y6")
+(net 32 "D3")
+(net 33 "TX")
+(net 34 "RX")
+(net 35 "D9")
+(net 36 "D10")
+(net 37 "V5")
+
+  
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -31.394 76.18 -10)
+    (property "Reference" "S1" (at 0 -7.6 -10) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 3 "K_PINKY_BOTTOM"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -28.2698091 57.41949580000001 -10)
+    (property "Reference" "S2" (at 0 -7.6 -10) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 4 "K_PINKY_HOME"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -25.1454446 38.6580068 -10)
+    (property "Reference" "S3" (at 0 -7.6 -10) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 5 "K_PINKY_TOP"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -49.013 59.24 -4)
+    (property "Reference" "S4" (at 0 -7.6 -4) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 6 "K_RING_BOTTOM"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -47.758307699999996 40.236230600000006 -4)
+    (property "Reference" "S5" (at 0 -7.6 -4) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 7 "K_RING_HOME"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -46.5025481 21.231533500000005 -4)
+    (property "Reference" "S6" (at 0 -7.6 -4) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -4) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -4) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 8 "K_RING_TOP"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -4) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -68.303 47.815 0)
+    (property "Reference" "S7" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 9 "K_MIDDLE_BOTTOM"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -68.303 28.763999999999996 0)
+    (property "Reference" "S8" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 10 "K_MIDDLE_HOME"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -68.303 9.713999999999997 0)
+    (property "Reference" "S9" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 11 "K_MIDDLE_TOP"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -87.353 57.268 0)
+    (property "Reference" "S10" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 12 "K_INDEX_BOTTOM"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -87.353 38.218 0)
+    (property "Reference" "S11" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 13 "K_INDEX_HOME"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -87.353 19.168000000000003 0)
+    (property "Reference" "S12" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 14 "K_INDEX_TOP"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -106.403 60.316 0)
+    (property "Reference" "S13" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 15 "K_INNER_BOTTOM"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -106.403 41.266000000000005 0)
+    (property "Reference" "S14" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 16 "K_INNER_HOME"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -106.403 22.216000000000005 0)
+    (property "Reference" "S15" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 17 "K_INNER_TOP"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -11.178 71.258 -10)
+    (property "Reference" "S16" (at 0 -7.6 -10) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 -10) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 -10) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 18 "K_OUTER"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 -10) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -78.034 78.725 0)
+    (property "Reference" "S17" (at 0 -7.6 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 0) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 0) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 19 "K_THUMB1"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -99.12 81.835 15)
+    (property "Reference" "S18" (at 0 -7.6 15) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 15) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 15) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 15) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 15) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 15) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 20 "K_THUMB2"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 15) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 15) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:switch_he"
+    (layer "F.Cu")
+    (at -118.647 90.435 30)
+    (property "Reference" "S19" (at 0 -7.6 30) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -7 -7) (end 7 7) (layer "Dwgs.User") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_rect (start -2.05 -1.7) (end 2.05 1.7) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "" np_thru_hole circle (at -5.08 0 30) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 5.08 0 30) (size 1.75 1.75) (drill 1.75) (layers "*.Cu" "*.Mask"))
+    
+    (pad "1" smd roundrect (at -1.1375 -0.95 30) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "2" smd roundrect (at -1.1375 0.95 30) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    
+    (pad "3" smd roundrect (at 1.1375 0 30) (size 1.325 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 21 "K_THUMB3"))
+    (fp_rect (start -1.1 2.6) (end 2.6 4.6) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+    (pad "C1" smd roundrect (at -0.2875 3.6 30) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    
+    (pad "C2" smd roundrect (at 1.7875 3.6 30) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:mux_4051"
+    (layer "F.Cu")
+    (at -58 80 -90)
+    (property "Reference" "IC1" (at 0 -6.3 -90) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -1.95 -4.95) (end 1.95 4.95) (layer "F.Fab") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_line (start -1.95 -5.2) (end -3.7 -5.2) (layer "F.SilkS") (stroke (width 0.15) (type solid)))
+    (fp_circle (center -1.2 -3.9) (end -0.9 -3.9) (layer "F.SilkS") (stroke (width 0.15) (type solid)) (fill solid))
+    (fp_rect (start -4.1 -5.2) (end 4.1 5.2) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "1" smd roundrect (at -2.7 -4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 6 "K_RING_BOTTOM"))
+    (pad "2" smd roundrect (at -2.7 -3.1750000000000003 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 8 "K_RING_TOP"))
+    (pad "3" smd roundrect (at -2.7 -1.9050000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 22 "ADC_A"))
+    (pad "4" smd roundrect (at -2.7 -0.6350000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 26 "Y7"))
+    (pad "5" smd roundrect (at -2.7 0.6349999999999998 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 7 "K_RING_HOME"))
+    (pad "6" smd roundrect (at -2.7 1.9049999999999994 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "7" smd roundrect (at -2.7 3.175 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "8" smd roundrect (at -2.7 4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "9" smd roundrect (at 2.7 4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 25 "SEL2"))
+    (pad "10" smd roundrect (at 2.7 3.1750000000000003 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 24 "SEL1"))
+    (pad "11" smd roundrect (at 2.7 1.9050000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 23 "SEL0"))
+    (pad "12" smd roundrect (at 2.7 0.6350000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 18 "K_OUTER"))
+    (pad "13" smd roundrect (at 2.7 -0.6349999999999998 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 3 "K_PINKY_BOTTOM"))
+    (pad "14" smd roundrect (at 2.7 -1.9049999999999994 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 4 "K_PINKY_HOME"))
+    (pad "15" smd roundrect (at 2.7 -3.175 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 5 "K_PINKY_TOP"))
+    (pad "16" smd roundrect (at 2.7 -4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (fp_rect (start -1.9 -8.35) (end 1.9 -6.35) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "C1" smd roundrect (at -1.0375 -7.35 -90) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (pad "C2" smd roundrect (at 1.0375 -7.35 -90) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:mux_4051"
+    (layer "F.Cu")
+    (at -61 71.2 -90)
+    (property "Reference" "IC2" (at 0 -6.3 -90) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -1.95 -4.95) (end 1.95 4.95) (layer "F.Fab") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_line (start -1.95 -5.2) (end -3.7 -5.2) (layer "F.SilkS") (stroke (width 0.15) (type solid)))
+    (fp_circle (center -1.2 -3.9) (end -0.9 -3.9) (layer "F.SilkS") (stroke (width 0.15) (type solid)) (fill solid))
+    (fp_rect (start -4.1 -5.2) (end 4.1 5.2) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "1" smd roundrect (at -2.7 -4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 13 "K_INDEX_HOME"))
+    (pad "2" smd roundrect (at -2.7 -3.1750000000000003 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 19 "K_THUMB1"))
+    (pad "3" smd roundrect (at -2.7 -1.9050000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 27 "ADC_B"))
+    (pad "4" smd roundrect (at -2.7 -0.6350000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 20 "K_THUMB2"))
+    (pad "5" smd roundrect (at -2.7 0.6349999999999998 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 14 "K_INDEX_TOP"))
+    (pad "6" smd roundrect (at -2.7 1.9049999999999994 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "7" smd roundrect (at -2.7 3.175 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "8" smd roundrect (at -2.7 4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "9" smd roundrect (at 2.7 4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 25 "SEL2"))
+    (pad "10" smd roundrect (at 2.7 3.1750000000000003 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 24 "SEL1"))
+    (pad "11" smd roundrect (at 2.7 1.9050000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 23 "SEL0"))
+    (pad "12" smd roundrect (at 2.7 0.6350000000000002 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 12 "K_INDEX_BOTTOM"))
+    (pad "13" smd roundrect (at 2.7 -0.6349999999999998 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 9 "K_MIDDLE_BOTTOM"))
+    (pad "14" smd roundrect (at 2.7 -1.9049999999999994 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 10 "K_MIDDLE_HOME"))
+    (pad "15" smd roundrect (at 2.7 -3.175 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 11 "K_MIDDLE_TOP"))
+    (pad "16" smd roundrect (at 2.7 -4.445 -90) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (fp_rect (start -1.9 -8.35) (end 1.9 -6.35) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "C1" smd roundrect (at -1.0375 -7.35 -90) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (pad "C2" smd roundrect (at 1.0375 -7.35 -90) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:mux_4051"
+    (layer "F.Cu")
+    (at -121 45 0)
+    (property "Reference" "IC3" (at 0 -6.3 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -1.95 -4.95) (end 1.95 4.95) (layer "F.Fab") (stroke (width 0.1) (type solid)) (fill none))
+    (fp_line (start -1.95 -5.2) (end -3.7 -5.2) (layer "F.SilkS") (stroke (width 0.15) (type solid)))
+    (fp_circle (center -1.2 -3.9) (end -0.9 -3.9) (layer "F.SilkS") (stroke (width 0.15) (type solid)) (fill solid))
+    (fp_rect (start -4.1 -5.2) (end 4.1 5.2) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "1" smd roundrect (at -2.7 -4.445 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 29 "Y4"))
+    (pad "2" smd roundrect (at -2.7 -3.1750000000000003 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 31 "Y6"))
+    (pad "3" smd roundrect (at -2.7 -1.9050000000000002 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 28 "ADC_C"))
+    (pad "4" smd roundrect (at -2.7 -0.6350000000000002 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 26 "Y7"))
+    (pad "5" smd roundrect (at -2.7 0.6349999999999998 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 30 "Y5"))
+    (pad "6" smd roundrect (at -2.7 1.9049999999999994 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "7" smd roundrect (at -2.7 3.175 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "8" smd roundrect (at -2.7 4.445 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+    (pad "9" smd roundrect (at 2.7 4.445 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 25 "SEL2"))
+    (pad "10" smd roundrect (at 2.7 3.1750000000000003 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 24 "SEL1"))
+    (pad "11" smd roundrect (at 2.7 1.9050000000000002 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 23 "SEL0"))
+    (pad "12" smd roundrect (at 2.7 0.6350000000000002 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 21 "K_THUMB3"))
+    (pad "13" smd roundrect (at 2.7 -0.6349999999999998 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 15 "K_INNER_BOTTOM"))
+    (pad "14" smd roundrect (at 2.7 -1.9049999999999994 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 16 "K_INNER_HOME"))
+    (pad "15" smd roundrect (at 2.7 -3.175 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 17 "K_INNER_TOP"))
+    (pad "16" smd roundrect (at 2.7 -4.445 0) (size 2.4 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (fp_rect (start -1.9 -8.35) (end 1.9 -6.35) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "C1" smd roundrect (at -1.0375 -7.35 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 1 "VCC"))
+    (pad "C2" smd roundrect (at 1.0375 -7.35 0) (size 1.175 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (net 2 "GND"))
+  )
+
+  (footprint "totemhe:xiao_rp2040"
+    (layer "F.Cu")
+    (at -21.811 15.801 -90)
+    (property "Reference" "MCU1" (at 0 -10.2 -90) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))
+    (fp_rect (start -8.9 -10.5) (end 8.9 10.5) (layer "Dwgs.User") (stroke (width 0.12) (type solid)) (fill none))
+    (fp_rect (start -4.5 -10.5) (end 4.5 -7.3) (layer "Dwgs.User") (stroke (width 0.12) (type solid)) (fill none))
+    (fp_rect (start -9.4 -11) (end 9.4 11) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (pad "1" thru_hole oval (at -7.62 -7.62 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 22 "ADC_A"))
+    (pad "14" thru_hole oval (at 7.62 -7.62 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") )
+    (fp_text user "D0" (at -4.4 -7.62 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "5V" (at 4.4 -7.62 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "2" thru_hole oval (at -7.62 -5.08 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 27 "ADC_B"))
+    (pad "13" thru_hole oval (at 7.62 -5.08 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 2 "GND"))
+    (fp_text user "D1" (at -4.4 -5.08 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "GND" (at 4.4 -5.08 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "3" thru_hole oval (at -7.62 -2.54 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 28 "ADC_C"))
+    (pad "12" thru_hole oval (at 7.62 -2.54 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 1 "VCC"))
+    (fp_text user "D2" (at -4.4 -2.54 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "3V3" (at 4.4 -2.54 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "4" thru_hole oval (at -7.62 0 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") )
+    (pad "11" thru_hole oval (at 7.62 0 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") )
+    (fp_text user "D3" (at -4.4 0 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "D10" (at 4.4 0 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "5" thru_hole oval (at -7.62 2.54 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 23 "SEL0"))
+    (pad "10" thru_hole oval (at 7.62 2.54 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") )
+    (fp_text user "D4" (at -4.4 2.54 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "D9" (at 4.4 2.54 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "6" thru_hole oval (at -7.62 5.079999999999999 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 24 "SEL1"))
+    (pad "9" thru_hole oval (at 7.62 5.079999999999999 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 25 "SEL2"))
+    (fp_text user "D5" (at -4.4 5.079999999999999 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "D8" (at 4.4 5.079999999999999 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+    (pad "7" thru_hole oval (at -7.62 7.62 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 33 "TX"))
+    (pad "8" thru_hole oval (at 7.62 7.62 -90) (size 2.75 1.8) (drill 1) (layers "*.Cu" "*.Mask") (net 34 "RX"))
+    (fp_text user "D6" (at -4.4 7.62 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify right)))
+    (fp_text user "D7" (at 4.4 7.62 -90) (layer "F.SilkS") (effects (font (size 0.6 0.6) (thickness 0.1)) (justify left)))
+  )
+
+    
+  (footprint "ceoloide:trrs_pj320a"
+    (layer "F.Cu")
+    (at -124.47 4.707 0)
+    (property "Reference" "TRRS1"
+      (at 0 14.2 0)
+      (layer "F.SilkS")
+      hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    
+    
+    (fp_line (start 2.8 -2) (end -2.8 -2) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start -2.8 0) (end -2.8 -2) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start 2.8 0) (end 2.8 -2) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start -3.05 0) (end -3.05 12.1) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start 3.05 0) (end 3.05 12.1) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start 3.05 12.1) (end -3.05 12.1) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+    (fp_line (start 3.05 0) (end -3.05 0) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
+      
+    
+    (pad "" np_thru_hole circle (at 0 8.6 0) (size 1.5 1.5) (drill 1.5) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 0 1.6 0) (size 1.5 1.5) (drill 1.5) (layers "*.Cu" "*.Mask"))
+      
+    
+    (pad "2" thru_hole oval (at 2.3 3.2 0) (size 1.6 2.2) (drill oval 0.9 1.5) (layers "*.Cu" "*.Mask") (net 2 "GND"))
+    (pad "3" thru_hole oval (at 2.3 6.2 0) (size 1.6 2.2) (drill oval 0.9 1.5) (layers "*.Cu" "*.Mask") (net 34 "RX"))
+    (pad "4" thru_hole oval (at 2.3 10.2 0) (size 1.6 2.2) (drill oval 0.9 1.5) (layers "*.Cu" "*.Mask") (net 1 "VCC"))
+    (pad "5" thru_hole oval (at -2.3 11.3 0) (size 1.6 2.2) (drill oval 0.9 1.5) (layers "*.Cu" "*.Mask") (net 33 "TX"))
+        
+  )
+    
+
+  (footprint "ceoloide:mounting_hole_plated"
+    (layer "F.Cu")
+    (at -125.845 74.52 0)
+    (property "Reference" "H1"
+      (at 0 3 0)
+      (layer "F.SilkS")
+      hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    
+    (pad "" thru_hole circle (at 0 0 0) (size 3.8000000000000003 3.8000000000000003) (drill 2.2) (layers "*.Cu" "*.Mask"))
+    
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "B.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+  )
+    
+
+  (footprint "ceoloide:mounting_hole_plated"
+    (layer "F.Cu")
+    (at -14.509 84.621 0)
+    (property "Reference" "H2"
+      (at 0 3 0)
+      (layer "F.SilkS")
+      hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    
+    (pad "" thru_hole circle (at 0 0 0) (size 3.8000000000000003 3.8000000000000003) (drill 2.2) (layers "*.Cu" "*.Mask"))
+    
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "B.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+  )
+    
+
+  (footprint "ceoloide:mounting_hole_plated"
+    (layer "F.Cu")
+    (at -38.533 8.069 0)
+    (property "Reference" "H3"
+      (at 0 3 0)
+      (layer "F.SilkS")
+      hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    
+    (pad "" thru_hole circle (at 0 0 0) (size 3.8000000000000003 3.8000000000000003) (drill 2.2) (layers "*.Cu" "*.Mask"))
+    
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "B.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+  )
+    
+
+  (footprint "ceoloide:mounting_hole_plated"
+    (layer "F.Cu")
+    (at -117.061 8.069 0)
+    (property "Reference" "H4"
+      (at 0 3 0)
+      (layer "F.SilkS")
+      hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    
+    (pad "" thru_hole circle (at 0 0 0) (size 3.8000000000000003 3.8000000000000003) (drill 2.2) (layers "*.Cu" "*.Mask"))
+    
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "F.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    (fp_circle (center 0 0) (end -2.1500000000000004 0) (layer "B.CrtYd") (stroke (width 0.05) (type solid)) (fill none))
+    
+  )
+    
+  (gr_line (start -78.892 4.243) (end -79.028 4.333) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -79.028 4.333) (end -79.028 4.656) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -79.028 4.656) (end -128.87 4.657) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -128.87 4.657) (end -128.87 89.128) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -128.87 89.128) (end -121.112 102.565) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -121.112 102.565) (end -116.943 100.017) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -116.943 100.017) (end -114.431 98.548) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -114.431 98.548) (end -113.151 97.855) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -113.151 97.855) (end -111.649 97.099) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -111.649 97.099) (end -109.039 95.922) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -109.039 95.922) (end -106.86 95.061) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -106.86 95.061) (end -105.383 94.209) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -105.383 94.209) (end -105.606 93.822) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -105.606 93.822) (end -87.285 88.913) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -87.285 88.913) (end -87.362 88.625) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -87.362 88.625) (end -10.638 88.626) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.638 88.626) (end -10.628 82.245) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.628 82.245) (end -10.087 82.341) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.087 82.341) (end -9.76 82.055) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -9.76 82.055) (end -9.294 81.818) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -9.294 81.818) (end -8.783 81.71) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -8.783 81.71) (end -8.522 81.707) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -8.522 81.707) (end -3.182 82.683) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -3.182 82.683) (end 0.041 63.383) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start 0.041 63.383) (end -9.143 61.656) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -9.143 61.656) (end -9.39 61.572) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -9.39 61.572) (end -9.843 61.311) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -9.843 61.311) (end -10.212 60.942) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.212 60.942) (end -10.472 60.492) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.472 60.492) (end -10.625 60.465) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.625 60.465) (end -10.631 4.661) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -10.631 4.661) (end -57.578 4.656) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -57.578 4.656) (end -57.578 4.358) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -57.578 4.358) (end -57.946 4.071) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -57.946 4.071) (end -58.119 3.874) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.119 3.874) (end -58.264 3.656) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.264 3.656) (end -58.464 3.174) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.464 3.174) (end -58.532 2.657) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.532 2.657) (end -58.533 0.072) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.533 0.072) (end -58.537 0.011) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.537 0.011) (end -58.599 0.007) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -58.599 0.007) (end -78.105 0.004) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -78.105 0.004) (end -78.127 2.917) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -78.127 2.917) (end -78.262 3.421) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -78.262 3.421) (end -78.378 3.656) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -78.378 3.656) (end -78.523 3.874) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start -78.523 3.874) (end -78.892 4.243) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+
+)
+
