@@ -19,10 +19,11 @@ totem_keys = [
   [87.353, -57.268, 0.0, 0],
   [106.403, -60.316, 0.0, 0],
   [11.178, -71.258, 10.0, 0],
-  // thumbs: 4 mm further inward and 1.75 mm further up than TOTEM: the outer thumb clears the straight inner side, and thumb 1's front edge lines up with the main body's bottom edge
+  // thumbs: 4 mm further inward and 1.75 mm further up than TOTEM: the outer thumb clears the straight inner side, and thumb 1's front edge lines up with the main body's bottom edge.
+  // Thumbs 2 and 3 sit on an 81.69 mm arc centred straight below thumb 1, 15 degrees apart, so the plate's front corners fall mid-gap
   [78.034, -78.725, 0.0, 1],
-  [99.120, -81.835, -15.0, 1],
-  [118.647, -90.435, -30.0, 1]];
+  [99.177, -81.508, -15.0, 1],
+  [118.878, -89.669, -30.0, 1]];
 totem_holes = [[125.845, -74.520], [14.509, -84.621], [38.533, -8.069], [117.061, -8.069]];
 totem_xiao = [21.811, -15.801];   // centre; USB-C faces the outer edge
 totem_trrs = [124.470, -4.707];   // MJ-4PP-9, mouth faces the back edge

@@ -1,0 +1,3 @@
+SRC += he_matrix.c
+CUSTOM_MATRIX = lite
+ANALOG_DRIVER_REQUIRED = yes

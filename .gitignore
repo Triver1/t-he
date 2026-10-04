@@ -1,0 +1,10 @@
+# QMK checkout that build.sh clones for compiling (about 700 MB)
+firmware/qmk_firmware/
+# KiCad per-user and generated files
+*.kicad_prl
+*-backups/
+fp-info-cache
+\#auto_saved_files\#
+pcb/production/
+__pycache__/
+.DS_Store
