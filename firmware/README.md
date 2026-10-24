@@ -1,6 +1,6 @@
-# THE firmware (QMK)
+# Tot-HE-m firmware (QMK)
 
-QMK keyboard definition for THE: XIAO RP2040 per half, three 74HC4051 muxes, 19 linear
+QMK keyboard definition for Tot-HE-m: XIAO RP2040 per half, three 74HC4051 muxes, 19 linear
 hall sensors per half, half-duplex serial over one TRRS wire. The scan follows Boardloaf-HE's port (Cipulot / byungyoonc):
 one ADC pin per mux, shared select lines, row = mux, column = channel. The key logic follows Hector: each key
 measures its rest reading at boot, reads deflection in either direction so magnet polarity does not matter, and
@@ -23,7 +23,7 @@ each mux to a XIAO pin, and stops without writing anything if a connection is un
 - every mux: VCC on pin 16, GND, VEE and E (active low) on GND, common Z on a XIAO pin with an ADC (GP26 to 29),
   S0 to S2 on the same three XIAO pins in the same order as the other muxes
 - every sensor output on exactly one mux input, no two keys on one channel, all 19 keys present
-- XIAO 3V3 on VCC, 5V unconnected, TRRS tip VCC and sleeve GND, ring 2 on a XIAO pin (the half-duplex link, D6)
+- XIAO 3V3 on VCC, 5V unconnected, TRRS tip VCC and sleeve GND, ring 2 on a XIAO pin (the half-duplex link, D7)
 - both halves on the same XIAO pins, no net shared between them, and both in agreement with `mux_map.json`
 
 Pin data: 74HC4051 from the Nexperia datasheet (rev 12, table 2), XIAO RP2040 from the Seeed wiki.

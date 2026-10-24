@@ -1,6 +1,6 @@
 // Fit-test mock of the HE PCB: the board with every component as a block, sized from the datasheets.
-// Print it and drop it into the shell and plate to check clearances before ordering boards. The board is reversible:
-// the XIAO and TRRS jack sit on the switch side, the sensors, capacitors and muxes on the underside.
+// Print it and drop it into the shell and plate to check clearances before ordering boards. Part positions come from
+// mock_parts.scad (gen_mock.py): the XIAO and TRRS jack on the switch side, the sensors, capacitors and muxes underneath.
 // Export: openscad -D 'part="none"' -D 'side="left"' -o stl/totemhe_pcbmock_left.stl pcb_mock.scad
 side = "left";
 include <totem_he_case.scad>

@@ -1,4 +1,4 @@
-// Analog matrix for THE: three 74HC4051 muxes, one per ADC pin, sharing three select lines.
+// Analog matrix for Tot-HE-m: three 74HC4051 muxes, one per ADC pin, sharing three select lines.
 // Row = mux (ADC pin), column = mux channel. he_map.h, generated from the routed boards, says which
 // channels carry a sensor. Scan structure follows Boardloaf-HE (Cipulot / byungyoonc); the polarity-agnostic
 // reading and per-key learned travel follow Hector.
@@ -105,7 +105,7 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
 // Prints every sensor's rest reading with a verdict. Run it with each half plugged in on its own: a wrong
 // sensor pinout, a missing solder joint or a swapped part shows up as a reading stuck at a rail.
 static void he_report(void) {
-    uprintf("THE self test, %s half\n", is_keyboard_left() ? "left" : "right");
+    uprintf("Tot-HE-m self test, %s half\n", is_keyboard_left() ? "left" : "right");
     uint8_t bad = 0;
     for (uint8_t r = 0; r < MATRIX_ROWS / 2; r++) {
         for (uint8_t c = 0; c < MATRIX_COLS; c++) {

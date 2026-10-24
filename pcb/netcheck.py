@@ -8,7 +8,7 @@ MUX = {h: {ic: {int(c): k for c, k in m['chan'].items()} for ic, m in muxes.item
 ADC = {h: {ic: m['adc'] for ic, m in muxes.items()} for h, muxes in _MAP.items()}
 # 74HC4051 pins: 1 Y4, 2 Y6, 3 Z, 4 Y7, 5 Y5, 6 E, 7 VEE, 8 GND, 9 S2, 10 S1, 11 S0, 12 Y3, 13 Y0, 14 Y1, 15 Y2, 16 VCC
 MUXPIN = {'13': 0, '14': 1, '15': 2, '12': 3, '1': 4, '5': 5, '2': 6, '4': 7}
-XIAO = {'1': 'ADC_A', '2': 'ADC_B', '3': 'ADC_C', '5': 'SEL0', '6': 'SEL1', '9': 'SEL2', '7': 'DATA', '12': 'VCC', '13': 'GND'}
+XIAO = {'1': 'ADC_A', '2': 'ADC_C', '3': 'ADC_B', '9': 'SEL0', '10': 'SEL1', '11': 'SEL2', '8': 'DATA', '12': 'VCC', '13': 'GND'}
 TRRS = {'4': 'VCC', '3': 'DATA', '2': 'GND'}   # PJ-320A: tip (ring 1 shares its pad), ring 2, sleeve
 SENSOR_PINS = ['VCC', 'OUT', 'GND']            # SOT-23 49E-class and DRV5055: 1 VCC, 2 OUT, 3 GND
 BOARD = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'totem_he.kicad_pcb')
@@ -58,7 +58,7 @@ for side in ('left', 'right'):
     check(seen == outs, f'{side}: every sensor output reaches exactly one mux input (missing {outs - seen}, extra {seen - outs})')
     n, p = fps['MCU1']
     for pin, want in XIAO.items(): check(p.get(pin) == want, f'{side} XIAO pin {pin} -> {want}, got {p.get(pin)}')
-    for pin in ('4', '8', '10', '11', '14'): check(p.get(pin) is None, f'{side} XIAO pin {pin} unconnected, got {p.get(pin)}')
+    for pin in ('4', '5', '6', '7', '14'): check(p.get(pin) is None, f'{side} XIAO pin {pin} unconnected, got {p.get(pin)}')
     n, p = fps['TRRS1']
     for pin, want in TRRS.items(): check(p.get(pin) == want, f'{side} TRRS pin {pin} -> {want}, got {p.get(pin)}')
     print(f'{side}: {len(fps)} footprints checked')

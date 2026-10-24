@@ -8,3 +8,10 @@ fp-info-cache
 pcb/production/
 __pycache__/
 .DS_Store
+# Ergogen output and intermediate files, rebuilt by pcb/build.sh
+pcb/out/
+.route_undo/
+# Generated fabrication files and render previews, rebuilt by pcb/gerbers.sh and the OpenSCAD exports
+pcb/gerbers/
+pcb/*_gerbers.zip
+case/stl/*.png

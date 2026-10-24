@@ -53,15 +53,16 @@ right = [(2 * AXIS_X - x, y) for x, y in loop][::-1]
 s = open(src).read()
 pat = re.compile(r'\n\t?\s*\(gr_line\s*\(start ' + NUM + ' ' + NUM + r'\)\s*\(end ' + NUM + ' ' + NUM + r'\)(?:(?!\(gr_).)*?\(layer "Edge\.Cuts"\)(?:(?!\(gr_).)*?\)\s*\)', re.S)
 old = [((float(m[1]), float(m[2])), (float(m[3]), float(m[4]))) for m in pat.finditer(s)]
-template = pat.search(s)[0]
-if not old:
-    sys.exit('no Edge.Cuts lines found')
-
 new = [(ring[i - 1], ring[i]) for ring in (loop, right) for i in range(len(ring))]
-moved_out = max(min(segd(p, a, b) for a, b in new) for e in old for p in e)
-moved_in = max(min(segd(p, a, b) for a, b in old) for e in new for p in e)
-print(f'{len(old)} edge lines replaced by {len(new)}; largest move: old vertex to new edge {moved_out:.3f} mm, '
-      f'new vertex to old edge {moved_in:.3f} mm')
+if old:
+    template = pat.search(s)[0]
+    moved_out = max(min(segd(p, a, b) for a, b in new) for e in old for p in e)
+    moved_in = max(min(segd(p, a, b) for a, b in old) for e in new for p in e)
+    print(f'{len(old)} edge lines replaced by {len(new)}; largest move: old vertex to new edge {moved_out:.3f} mm, '
+          f'new vertex to old edge {moved_in:.3f} mm')
+else:   # a freshly generated board has no outline yet
+    template = '\n\t(gr_line\n\t\t(start 0 0)\n\t\t(end 0 0)\n\t\t(stroke\n\t\t\t(width 0.05)\n\t\t\t(type default)\n\t\t)\n\t\t(layer "Edge.Cuts")\n\t\t(uuid "0")\n\t)'
+    print(f'{len(new)} edge lines added')
 
 lines = ''
 for a, b in new:
@@ -69,7 +70,7 @@ for a, b in new:
     g = re.sub(r'\(end ' + NUM + ' ' + NUM + r'\)', f'(end {b[0]:.4f} {b[1]:.4f})', g, count=1)
     g = re.sub(r'\(uuid "[^"]+"\)', f'(uuid "{uuid.uuid4()}")', g)
     lines += g
-first = pat.search(s).start()
+first = pat.search(s).start() if old else s.rstrip().rindex(')')
 s = pat.sub('', s)
 s = s[:first] + lines + s[first:]
 open(dst, 'w').write(s)

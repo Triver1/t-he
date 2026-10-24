@@ -1,0 +1,258 @@
+meta:
+  engine: 4.1.0
+  name: totem_he
+units:
+  u: 19.05
+points:
+  zones:
+    origin:
+      anchor: {shift: [0, 0]}
+      columns: {o: }
+      rows: {r: {tags: [helper]}}
+    l_pinky_top:
+      anchor: {shift: [25.145, -38.658], rotate: 10}
+      key: {tags: [key_l], out_net: "L/K_PINKY_TOP"}
+      columns: {c: }
+      rows: {r: }
+    l_ring_top:
+      anchor: {shift: [46.503, -21.232], rotate: 4}
+      key: {tags: [key_l], out_net: "L/K_RING_TOP"}
+      columns: {c: }
+      rows: {r: }
+    l_middle_top:
+      anchor: {shift: [68.303, -9.714], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_MIDDLE_TOP"}
+      columns: {c: }
+      rows: {r: }
+    l_index_top:
+      anchor: {shift: [87.353, -19.168], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INDEX_TOP"}
+      columns: {c: }
+      rows: {r: }
+    l_inner_top:
+      anchor: {shift: [106.403, -22.216], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INNER_TOP"}
+      columns: {c: }
+      rows: {r: }
+    l_pinky_home:
+      anchor: {shift: [28.27, -57.419], rotate: 10}
+      key: {tags: [key_l], out_net: "L/K_PINKY_HOME"}
+      columns: {c: }
+      rows: {r: }
+    l_ring_home:
+      anchor: {shift: [47.758, -40.236], rotate: 4}
+      key: {tags: [key_l], out_net: "L/K_RING_HOME"}
+      columns: {c: }
+      rows: {r: }
+    l_middle_home:
+      anchor: {shift: [68.303, -28.764], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_MIDDLE_HOME"}
+      columns: {c: }
+      rows: {r: }
+    l_index_home:
+      anchor: {shift: [87.353, -38.218], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INDEX_HOME"}
+      columns: {c: }
+      rows: {r: }
+    l_inner_home:
+      anchor: {shift: [106.403, -41.266], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INNER_HOME"}
+      columns: {c: }
+      rows: {r: }
+    l_pinky_bottom:
+      anchor: {shift: [31.394, -76.18], rotate: 10}
+      key: {tags: [key_l], out_net: "L/K_PINKY_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    l_ring_bottom:
+      anchor: {shift: [49.013, -59.24], rotate: 4}
+      key: {tags: [key_l], out_net: "L/K_RING_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    l_middle_bottom:
+      anchor: {shift: [68.303, -47.815], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_MIDDLE_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    l_index_bottom:
+      anchor: {shift: [87.353, -57.268], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INDEX_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    l_inner_bottom:
+      anchor: {shift: [106.403, -60.316], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_INNER_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    l_outer:
+      anchor: {shift: [11.178, -71.258], rotate: 10}
+      key: {tags: [key_l], out_net: "L/K_OUTER"}
+      columns: {c: }
+      rows: {r: }
+    l_thumb1:
+      anchor: {shift: [78.034, -78.725], rotate: 0}
+      key: {tags: [key_l], out_net: "L/K_THUMB1"}
+      columns: {c: }
+      rows: {r: }
+    l_thumb2:
+      anchor: {shift: [99.177, -81.508], rotate: -15}
+      key: {tags: [key_l], out_net: "L/K_THUMB2"}
+      columns: {c: }
+      rows: {r: }
+    l_thumb3:
+      anchor: {shift: [118.878, -89.669], rotate: -30}
+      key: {tags: [key_l], out_net: "L/K_THUMB3"}
+      columns: {c: }
+      rows: {r: }
+    r_pinky_top:
+      anchor: {shift: [239.589, -38.658], rotate: -10}
+      key: {tags: [key_r], out_net: "R/K_PINKY_TOP"}
+      columns: {c: }
+      rows: {r: }
+    r_ring_top:
+      anchor: {shift: [218.231, -21.232], rotate: -4}
+      key: {tags: [key_r], out_net: "R/K_RING_TOP"}
+      columns: {c: }
+      rows: {r: }
+    r_middle_top:
+      anchor: {shift: [196.431, -9.714], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_MIDDLE_TOP"}
+      columns: {c: }
+      rows: {r: }
+    r_index_top:
+      anchor: {shift: [177.381, -19.168], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INDEX_TOP"}
+      columns: {c: }
+      rows: {r: }
+    r_inner_top:
+      anchor: {shift: [158.331, -22.216], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INNER_TOP"}
+      columns: {c: }
+      rows: {r: }
+    r_pinky_home:
+      anchor: {shift: [236.464, -57.419], rotate: -10}
+      key: {tags: [key_r], out_net: "R/K_PINKY_HOME"}
+      columns: {c: }
+      rows: {r: }
+    r_ring_home:
+      anchor: {shift: [216.976, -40.236], rotate: -4}
+      key: {tags: [key_r], out_net: "R/K_RING_HOME"}
+      columns: {c: }
+      rows: {r: }
+    r_middle_home:
+      anchor: {shift: [196.431, -28.764], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_MIDDLE_HOME"}
+      columns: {c: }
+      rows: {r: }
+    r_index_home:
+      anchor: {shift: [177.381, -38.218], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INDEX_HOME"}
+      columns: {c: }
+      rows: {r: }
+    r_inner_home:
+      anchor: {shift: [158.331, -41.266], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INNER_HOME"}
+      columns: {c: }
+      rows: {r: }
+    r_pinky_bottom:
+      anchor: {shift: [233.34, -76.18], rotate: -10}
+      key: {tags: [key_r], out_net: "R/K_PINKY_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    r_ring_bottom:
+      anchor: {shift: [215.721, -59.24], rotate: -4}
+      key: {tags: [key_r], out_net: "R/K_RING_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    r_middle_bottom:
+      anchor: {shift: [196.431, -47.815], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_MIDDLE_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    r_index_bottom:
+      anchor: {shift: [177.381, -57.268], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INDEX_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    r_inner_bottom:
+      anchor: {shift: [158.331, -60.316], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_INNER_BOTTOM"}
+      columns: {c: }
+      rows: {r: }
+    r_outer:
+      anchor: {shift: [253.556, -71.258], rotate: -10}
+      key: {tags: [key_r], out_net: "R/K_OUTER"}
+      columns: {c: }
+      rows: {r: }
+    r_thumb1:
+      anchor: {shift: [186.7, -78.725], rotate: -0}
+      key: {tags: [key_r], out_net: "R/K_THUMB1"}
+      columns: {c: }
+      rows: {r: }
+    r_thumb2:
+      anchor: {shift: [165.557, -81.508], rotate: 15}
+      key: {tags: [key_r], out_net: "R/K_THUMB2"}
+      columns: {c: }
+      rows: {r: }
+    r_thumb3:
+      anchor: {shift: [145.856, -89.669], rotate: 30}
+      key: {tags: [key_r], out_net: "R/K_THUMB3"}
+      columns: {c: }
+      rows: {r: }
+pcbs:
+  totem_he:
+    template: kicad8
+    references: true
+    footprints:
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [38, -49], rotate: 270}
+        params: {VCC: "L/VCC", GND: "L/GND", Z: "L/ADC_A", S0: "L/SEL0", S1: "L/SEL1", S2: "L/SEL2", Y0: "L/K_PINKY_BOTTOM", Y1: "L/K_PINKY_HOME", Y2: "L/K_OUTER", Y3: "L/K_RING_BOTTOM", Y5: "L/K_RING_HOME", Y6: "L/K_PINKY_TOP", Y7: "L/K_RING_TOP"}
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [75.3, -38], rotate: 270}
+        params: {VCC: "L/VCC", GND: "L/GND", Z: "L/ADC_B", S0: "L/SEL0", S1: "L/SEL1", S2: "L/SEL2", Y0: "L/K_INDEX_BOTTOM", Y1: "L/K_MIDDLE_BOTTOM", Y3: "L/K_INDEX_HOME", Y4: "L/K_MIDDLE_HOME", Y5: "L/K_INDEX_TOP", Y6: "L/K_MIDDLE_TOP"}
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [100, -70.5], rotate: 90}
+        params: {VCC: "L/VCC", GND: "L/GND", Z: "L/ADC_C", S0: "L/SEL0", S1: "L/SEL1", S2: "L/SEL2", Y0: "L/K_INNER_HOME", Y2: "L/K_INNER_BOTTOM", Y3: "L/K_INNER_TOP", Y4: "L/K_THUMB3", Y6: "L/K_THUMB2", Y7: "L/K_THUMB1"}
+      - what: switch_he
+        where: [key_l]
+        params: {VCC: "L/VCC", GND: "L/GND", OUT: "{{out_net}}"}
+      - what: xiao_rp2040
+        where: {ref: origin_o_r, shift: [21.811, -15.801], rotate: 90}
+        params: {D0: "L/ADC_A", D1: "L/ADC_C", D2: "L/ADC_B", D8: "L/SEL0", D9: "L/SEL1", D10: "L/SEL2", D7: "L/DATA", V3: "L/VCC", GND: "L/GND"}
+      - what: trrs_pj320a
+        where: {ref: origin_o_r, shift: [124.47, -4.707], rotate: 0}
+        params: {TP: "L/VCC", R2: "L/DATA", SL: "L/GND"}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [125.845, -74.52]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [14.509, -84.621]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [38.533, -8.069]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [117.061, -8.069]}
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [226.734, -49], rotate: 270}
+        params: {VCC: "R/VCC", GND: "R/GND", Z: "R/ADC_A", S0: "R/SEL0", S1: "R/SEL1", S2: "R/SEL2", Y0: "R/K_OUTER", Y1: "R/K_PINKY_BOTTOM", Y2: "R/K_RING_BOTTOM", Y3: "R/K_PINKY_HOME", Y4: "R/K_RING_HOME", Y5: "R/K_PINKY_TOP", Y6: "R/K_RING_TOP"}
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [193.434, -39], rotate: 270}
+        params: {VCC: "R/VCC", GND: "R/GND", Z: "R/ADC_B", S0: "R/SEL0", S1: "R/SEL1", S2: "R/SEL2", Y1: "R/K_INDEX_BOTTOM", Y2: "R/K_INDEX_HOME", Y3: "R/K_MIDDLE_BOTTOM", Y4: "R/K_INDEX_TOP", Y5: "R/K_MIDDLE_HOME", Y7: "R/K_MIDDLE_TOP"}
+      - what: mux_4051
+        where: {ref: origin_o_r, shift: [164.734, -70], rotate: 0}
+        params: {VCC: "R/VCC", GND: "R/GND", Z: "R/ADC_C", S0: "R/SEL0", S1: "R/SEL1", S2: "R/SEL2", Y1: "R/K_THUMB1", Y2: "R/K_THUMB2", Y4: "R/K_THUMB3", Y5: "R/K_INNER_BOTTOM", Y6: "R/K_INNER_TOP", Y7: "R/K_INNER_HOME"}
+      - what: switch_he
+        where: [key_r]
+        params: {VCC: "R/VCC", GND: "R/GND", OUT: "{{out_net}}"}
+      - what: xiao_rp2040
+        where: {ref: origin_o_r, shift: [242.923, -15.801], rotate: -90}
+        params: {D0: "R/ADC_A", D1: "R/ADC_C", D2: "R/ADC_B", D8: "R/SEL0", D9: "R/SEL1", D10: "R/SEL2", D7: "R/DATA", V3: "R/VCC", GND: "R/GND"}
+      - what: trrs_pj320a
+        where: {ref: origin_o_r, shift: [140.264, -4.707], rotate: 0}
+        params: {TP: "R/VCC", R2: "R/DATA", SL: "R/GND"}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [138.889, -74.52]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [250.225, -84.621]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [226.201, -8.069]}
+      - what: mounting_hole_plated
+        where: {ref: origin_o_r, shift: [147.673, -8.069]}

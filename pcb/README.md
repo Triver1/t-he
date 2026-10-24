@@ -1,8 +1,11 @@
-# THE PCB
+# Tot-HE-m PCB
 
 Hall-effect version of TOTEM's layout at MX spacing. `totem_he.kicad_pcb` holds both halves side by side, so one
 order covers both; open `totem_he.kicad_pro` beside it so KiCad loads the design rules. Both halves are placed and
-netted but not routed: route them by hand.
+routed (see Mux placement and routing).
+
+The board is generated with Ergogen: `./build.sh` rebuilds it from the case geometry, `mux_map.json` and the
+footprint modules in `footprints/`, then checks it. See "Generating the board" below.
 
 ## Layout
 
@@ -23,28 +26,30 @@ netted but not routed: route them by hand.
 
 Together the halves are 265 x 103 mm; each is 128.9 x 103.0 mm.
 
-## Mux placement and vias
+## Mux placement and routing
 
 Each half has one mux per finger group, on the underside between the columns it serves: IC1 takes the outer,
-pinky and ring keys (ADC_A, D0), IC2 middle and index (ADC_B, D1), IC3 inner and thumbs (ADC_C, D2). The channels
-follow the order in which the sensors sit around the mux, so the 19 sensor lines fan in without crossing, and the
-mux output (Z) points toward the XIAO. The right half's muxes keep their pinout while their placement is mirrored,
-so its channel order differs; `mux_map.json` lists both halves and the firmware has a map for each.
+pinky and ring keys (ADC_A, D0), IC2 middle and index (ADC_B, D2), IC3 inner and thumbs (ADC_C, D1). Its position
+and angle are the `at` entry in `mux_map.json`, chosen with at least 1 mm clear of every pad and peg hole. The
+channels follow the order the sensors sit around the mux, so the sensor lines fan in without crossing; where that
+needs a hand-set order, `mux_map.json` marks the mux `fixed`. The firmware has a channel map for each half.
 
-Routing plan, per half:
+The routing is hand-designed and written out in `routes.py`: every trace as waypoints, 45 degree bends, sensor
+patterns in each switch's own frame. `build.sh` applies it, so a regenerated board comes out routed.
 
 | Layer | Nets |
 | --- | --- |
-| Underside | 19 sensor outputs to their mux, the 3 mux outputs to XIAO D0 to D2, 3.3 V to sensors and muxes, ground fill |
-| Top | Select lines S0 to S2 from XIAO D4, D5, D8, and a ground fill that shields the analog traces below |
+| Underside | Signals: each sensor's output fanning into its mux, the bus from the XIAO along the top edge (data, select lines, two mux outputs) up through the notch above the middle-top key, short power stubs at each part |
+| Top | 3.3 V and ground as two interleaved combs: a 3.3 V rail along the top edge with a tooth down each column, ground teeth up each column joined by a rail along the bottom edge; no fills |
 
-The XIAO's plated holes reach both layers. The vias are pads inside the footprints, so they move with their part:
+Every switch has two tented vias in its footprint (3.3 V right of the sensor, ground left), so each sensor reaches
+both combs. Where a bus line branches to IC1 or IC2, it takes a via up and runs on the top layer between the power
+teeth; on the right half, IC2's output and the data line each hop one stretch on top the same way. 0.25 mm
+signals, 0.4 mm power stubs, 0.5 mm rails.
 
-- one ground via per sensor, between its GND pin and its capacitor's GND pad (19);
-- three select vias just outside each mux's pins 9 to 11 (9), and one ground via beside its pin 7 (3).
-
-That is 31 per half. The ground vias join the underside ground patches, which the 3.3 V and signal traces cut up,
-to the top ground fill; where two patches end up joined anyway, one of their vias can go.
+`route.py` (run as `./r`) is the tool the routing was drawn with: `./r view [x0 y0 x1 y1]` draws a region with
+open connections dashed, `./r open` lists them, `./r track`, `./r via`, `./r delete` and `./r undo` edit, and
+`./r drc` summarises. To change the routing, edit `routes.py` and run `./build.sh`.
 
 ## Electronics
 
@@ -59,8 +64,8 @@ Same scheme as Boardloaf-HE.
 | PJ-320A TRRS | 1 | Tip VCC, ring 1 tied to tip, ring 2 DATA, sleeve GND |
 | M2 plated holes | 4 | Case screws |
 
-XIAO pins: D0, D1, D2 read the three muxes (ADC0 to 2). D4, D5, D8 drive the shared select lines. D6 is the split
-link, one half-duplex wire on TRRS ring 2; D7, D3, D9, D10 and 5V are unconnected. 3V3 powers the sensors and
+XIAO pins: D0, D1, D2 read the three muxes (IC1, IC3, IC2). D8, D9, D10 drive the shared select lines S0 to S2.
+D7 is the split link, one half-duplex wire on TRRS ring 2; D3 to D6 and 5V are unconnected. 3V3 powers the sensors and
 muxes and feeds the other half over the tip. Which key sits on which mux channel is in `mux_map.json`, per half.
 
 DRV5055A3 (TI datasheet SBAS640C): 3.0 to 3.63 V, rests at 1.65 V, 15 mV/mT at 3.3 V, 2 mA typical and 4 mA
@@ -93,13 +98,27 @@ tracks, 0.2 mm clearance, 0.3 mm vias). Choose "Remove order number", or JLCPCB 
 Gerbers follow JLCPCB's KiCad guide: Protel extensions, solder mask subtracted from silkscreen, one Excellon file
 for plated and unplated holes, the alternate drill mode for the slotted TRRS pad.
 
-## Changing the design
+## Generating the board
 
-- Outline changes in `../case/totem_he_case.scad`: export `openscad -D 'part="pcb"' -o pcb2d.svg
-  ../case/totem_he_case.scad`, then `set_edge.py pcb2d.svg <in> <out>` replaces both halves' Edge.Cuts and prints
-  how far the edge moved.
-- Key moves in `../case/totem_geometry.scad`: `move_keys.py <in> <out>` snaps every switch footprint on both halves
-  to its key and prints what moved.
-- `mkpro.py` writes `totem_he.kicad_pro` (design rules, 0.25 mm edge clearance). Write it before filling any
-  pours, or KiCad fills to its default 0.5 mm.
-- `gen_mock.py` regenerates the PCB mock's part list, `../case/mock_parts.scad`, from the left half.
+```bash
+./build.sh
+```
+
+replaces `totem_he.kicad_pcb` with a freshly generated, routed board (`./build.sh other.kicad_pcb` writes elsewhere).
+It runs Ergogen, KiCad and OpenSCAD in Docker:
+
+1. `gen_config.py` writes `config.yaml` for Ergogen. Key, XIAO, jack and hole positions come from
+   `../case/totem_geometry.scad`; the right half is the left mirrored about `halves.AXIS_X`, each part turned to minus
+   its angle but not mirrored. Each mux's position is the `at` entry in `mux_map.json` (board x, y, angle, per
+   half); the script works out its channels and writes them back to `mux_map.json`. Every net gets its half's
+   prefix (`L/`, `R/`).
+2. Ergogen builds both halves into one board from `config.yaml` and the modules in `footprints/` (switch with its
+   sensor and capacitor, mux, XIAO, TRRS jack, mounting hole).
+3. `finish.py` renumbers the right half (S101, IC101, ...) and saves the board in KiCad 8's format.
+4. `set_edge.py` adds both outlines from the case's PCB shape (`openscad -D 'part="pcb"'`).
+5. `mkpro.py` writes the design rules, `netcheck.py` checks the nets, `gen_mock.py` writes the PCB mock's part list.
+
+Generating discards any routing, so change the layout before routing; after that, edit the board in KiCad.
+`set_edge.py pcb2d.svg <in> <out>` also works on a routed board, for outline changes, and prints how far the edge
+moved. Write the `.kicad_pro` (`mkpro.py`) before filling any pours, or KiCad fills to its default 0.5 mm edge
+clearance instead of 0.25 mm.

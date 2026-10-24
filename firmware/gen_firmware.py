@@ -132,12 +132,10 @@ for what in ('rows', 'sel', 'data'):
 
 mm = json.load(open(os.path.join(PCB, 'mux_map.json')))
 for side, h in (('left', L), ('right', R)):
-    design = {}
-    for m in mm[side].values():
-        row = 'ABC'.index(m['adc'][-1])      # ADC_A, ADC_B, ADC_C are D0, D1, D2
-        for ch, key in m['chan'].items():
-            design[key] = (row, int(ch))
-    diff = {k: (h['keys'].get(k), design.get(k)) for k in KEYS if h['keys'].get(k) != design.get(k)}
+    design = {key: (ic, int(ch)) for ic, m in mm[side].items() for ch, key in m['chan'].items()}
+    mux_of = lambda row: 'IC%d' % (int(h['mux_of_row'][row][2:]) % RIGHT_REF)
+    board = {k: (mux_of(r), c) for k, (r, c) in h['keys'].items()}
+    diff = {k: (board.get(k), design.get(k)) for k in KEYS if board.get(k) != design.get(k)}
     check(not diff, f'{side}: board and mux_map.json disagree (board, design): {diff}')
 
 if errors:
@@ -223,8 +221,8 @@ for e in layout:
     del e['label']
 
 kb = {
-    'keyboard_name': 'THE',
-    'manufacturer': 'THE',
+    'keyboard_name': 'Tot-HE-m',
+    'manufacturer': 'Tot-HE-m',
     'maintainer': 'tristan',
     'processor': 'RP2040',
     'bootloader': 'rp2040',

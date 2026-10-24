@@ -2,19 +2,23 @@
  "left": {
   "IC2": {
    "at": [
-    77.8,
+    75.3,
     38.0,
     270
    ],
    "adc": "ADC_B",
    "chan": {
-    "0": "index_top",
-    "1": "index_bottom",
-    "2": "middle_bottom",
+    "0": "index_bottom",
+    "1": "middle_bottom",
     "3": "index_home",
-    "5": "middle_top",
-    "7": "middle_home"
-   }
+    "4": "middle_home",
+    "5": "index_top",
+    "6": "middle_top"
+   },
+   "z_to": [
+    73.4,
+    10.0
+   ]
   },
   "IC1": {
    "at": [
@@ -41,64 +45,80 @@
    ],
    "adc": "ADC_C",
    "chan": {
-    "0": "thumb3",
-    "1": "thumb2",
-    "2": "thumb1",
-    "3": "inner_bottom",
-    "5": "inner_home",
-    "7": "inner_top"
-   }
+    "0": "inner_home",
+    "2": "inner_bottom",
+    "3": "inner_top",
+    "4": "thumb3",
+    "6": "thumb2",
+    "7": "thumb1"
+   },
+   "z_to": [
+    90.0,
+    70.5
+   ],
+   "fixed": true
   }
  },
  "right": {
   "IC2": {
    "at": [
-    187.934,
-    38.0,
-    180
+    193.434,
+    39.0,
+    270
    ],
    "adc": "ADC_B",
    "chan": {
-    "0": "index_home",
-    "2": "index_top",
-    "3": "index_bottom",
-    "4": "middle_top",
-    "5": "middle_bottom",
-    "6": "middle_home"
-   }
+    "1": "index_bottom",
+    "2": "index_home",
+    "3": "middle_bottom",
+    "4": "index_top",
+    "5": "middle_home",
+    "7": "middle_top"
+   },
+   "z_to": [
+    191.5,
+    10.0
+   ],
+   "fixed": true
   },
   "IC1": {
    "at": [
     226.734,
     49.0,
-    180
+    270
    ],
    "adc": "ADC_A",
    "chan": {
-    "0": "pinky_home",
-    "1": "ring_bottom",
-    "2": "ring_home",
-    "3": "pinky_bottom",
-    "4": "ring_top",
-    "5": "outer",
-    "7": "pinky_top"
-   }
+    "0": "outer",
+    "1": "pinky_bottom",
+    "2": "ring_bottom",
+    "3": "pinky_home",
+    "4": "ring_home",
+    "5": "pinky_top",
+    "6": "ring_top"
+   },
+   "fixed": true
   },
   "IC3": {
    "at": [
     164.734,
-    70.5,
+    70.0,
     0
    ],
    "adc": "ADC_C",
    "chan": {
-    "1": "inner_bottom",
-    "2": "inner_home",
-    "3": "thumb3",
-    "4": "inner_top",
-    "5": "thumb2",
-    "7": "thumb1"
-   }
+    "1": "thumb1",
+    "2": "thumb2",
+    "4": "thumb3",
+    "5": "inner_bottom",
+    "6": "inner_top",
+    "7": "inner_home"
+   },
+   "z_to": [
+    164.7,
+    50.0
+   ],
+   "fixed": true
   }
  }
 }

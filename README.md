@@ -1,4 +1,4 @@
-# THE
+# Tot-HE-m
 
 A wired, hall-effect split keyboard on TOTEM's layout (GEIGEIGEIST/TOTEM rev 0.3, CC BY-NC-SA 4.0) scaled to MX
 spacing, for MX-style magnetic switches (Gateron KS-20 class) and a Seeed XIAO RP2040 per half.
@@ -64,9 +64,9 @@ Compatibility, checked against the datasheets:
   swings around it, inside the RP2040's 3.3 V ADC range. It is wired 1 VCC, 2 OUT, 3 GND (TI datasheet SBAS640C),
   the SOT-23 order this footprint uses; `pcb/README.md` has the details.
 - 74HC4051 runs from 2 to 6 V; select lines and analog path are at 3.3 V.
-- XIAO RP2040: D0-D2 are the three ADC inputs, D4/D5/D8 the select lines, D6 the half-duplex split link.
+- XIAO RP2040: D0-D2 are the three ADC inputs, D8-D10 the select lines, D7 the half-duplex split link.
   3V3 powers sensors and muxes and feeds the other half over the TRRS tip, as TOTEM's wired build does.
-  D3, D7, D9, D10 and 5V are unconnected. That puts both halves on one XIAO regulator: 38 sensors at 2 mA typical
+  D3 to D6 and 5V are unconnected. That puts both halves on one XIAO regulator: 38 sensors at 2 mA typical
   (4 mA maximum at 3.3 V) plus two RP2040s is about 130 mA typical, 200 mA worst case, against the 500 mA Seeed
   gives for the 3V3 pin.
 - TRRS: tip VCC (ring 1 tied to it), ring 2 DATA, sleeve GND. One wire carries the link both ways, so both
@@ -76,7 +76,7 @@ Compatibility, checked against the datasheets:
 
 - Firmware: tune actuation on real switches; rapid trigger and VIA settings are not implemented yet.
 - Print the mock and the plate and fit-test them in the shell before ordering boards.
-- Route both PCB halves by hand, then run the checks and `pcb/production.sh`.
+- Check the routing in KiCad (`pcb/routes.py` has the plan), then run `pcb/production.sh`.
 - Confirm the sensor pinout on one part before ordering 40 of them.
 - Flash the XIAO before final assembly: its BOOTSEL button is unreachable once the plate and shell are on, so
   keep a `QK_BOOT` key in the keymap.
@@ -86,8 +86,8 @@ Compatibility, checked against the datasheets:
 Case: `openscad --enable=roof -D 'part="shell"' -D 'side="left"' -o case/stl/totemhe_shell_left.stl case/totem_he_case.scad`
 (OpenSCAD 2025 or newer for `roof()`; parts: shell, plate, pcb, assembly). PCB mock: `pcb_mock.scad` with
 `-D 'part="none"'`. Key positions, holes, XIAO and TRRS come from `case/totem_geometry.scad`. The case reads it
-directly; the PCB follows through `pcb/move_keys.py` (switch positions) and `pcb/set_edge.py` (board edge). PCB order files: `pcb/production.sh`. Firmware: `firmware/build.sh`. Everything runs in Docker
-(OpenSCAD, KiCad 8, QMK).
+directly; the PCB is generated from it with Ergogen (`pcb/build.sh`). PCB order files: `pcb/production.sh`.
+Firmware: `firmware/build.sh`. Everything runs in Docker (OpenSCAD, Ergogen, KiCad 8, QMK).
 
 The viewer, `case/totem-he-case.html`, shows both halves with a separate material for the top shell and the plate
 (matte filament, Bambu Lab Galaxy Nebulae, matte or polished aluminium, each with its colours), keycap profile
