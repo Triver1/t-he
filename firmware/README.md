@@ -30,14 +30,11 @@ Pin data: 74HC4051 from the Nexperia datasheet (rev 12, table 2), XIAO RP2040 fr
 
 ## Flashing
 
-Hold BOOT while plugging a half in (or double-tap RESET once QMK is on it), then flash each half once with its
-handedness, since the board has no handedness pin:
-
-```bash
-qmk flash -kb the_he -km default -bl uf2-split-left
-```
-
-and `-bl uf2-split-right` on the other half. `QK_BOOT` is on both outer keys of layer 1.
+Hold BOOT while plugging a half in (or double-tap RESET once QMK is on it); the XIAO mounts as the RPI-RP2 drive.
+Drag `uf2/the_he_left.uf2` onto the left half and `uf2/the_he_right.uf2` onto the right: each stores its side on
+first boot, since the board has no handedness pin. With the QMK CLI, `qmk flash -kb the_he -km default -bl
+uf2-split-left` (or `-right`) does the same. `QK_BOOT` is on both outer keys of layer 1. `uf2/the_he_first.uf2` is
+the first build that ran on the board (before the calibration, averaging and glitch filtering), kept as a fallback.
 
 ## Wiring test
 
@@ -46,6 +43,11 @@ seconds it prints each sensor's mux, channel, key name, rest reading and a verdi
 rail (below 150 or above 870 of 1023, where a DRV5055 rests near 512) is flagged, which is how a
 wrong sensor pinout or a dry joint shows up. Pressing a key prints its name, so a key that reports under another
 name has its sensor on the wrong channel.
+
+Without the QMK CLI, flash `the_he_typediag.uf2` instead and focus a text editor with a US (ABC) layout: about
+three seconds after boot it types each sensor's rest reading, noise and verdict, then asks for every key to be
+pressed once and, 45 s later, types each key's lowest and highest reading, swing, press count and the order in
+which presses were detected. The keys send nothing while it runs.
 
 ## Settings
 
