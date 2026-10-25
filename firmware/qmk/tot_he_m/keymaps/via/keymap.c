@@ -42,17 +42,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _______, _______, _______,             _______, _______, _______
     )
 };
-
-// combos from the Sweep config: I + O is Backspace, the four keys left of B or right of N enter the bootloader
-const uint16_t PROGMEM bspc_combo[]       = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM boot_left_combo[]  = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM boot_right_combo[] = {KC_M, KC_COMM, KC_DOT, KC_SLSH, COMBO_END};
-combo_t key_combos[] = {
-    COMBO(bspc_combo, KC_BSPC),
-    COMBO(boot_left_combo, QK_BOOT),
-    COMBO(boot_right_combo, QK_BOOT),
-};
-
-uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
-    return combo_index == 0 ? 15 : COMBO_TERM;   // the Sweep's 15 ms for Backspace
-}

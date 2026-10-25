@@ -32,11 +32,15 @@ Pin data: 74HC4051 from the Nexperia datasheet (rev 12, table 2), XIAO RP2040 fr
 ## Flashing
 
 Hold BOOT while plugging a half in (or double-tap RESET once QMK is on it); the XIAO mounts as the RPI-RP2 drive.
-Drag `uf2/tot_he_m_left.uf2` onto the left half and `uf2/tot_he_m_right.uf2` onto the right: each stores its side on
-first boot, since the board has no handedness pin. With the QMK CLI, `qmk flash -kb tot_he_m -km default -bl
+Drag `uf2/tot_he_m_left.uf2` onto the left half and `uf2/tot_he_m_right.uf2` onto the right: each stores its side
+on first boot, since the board has no handedness pin. With the QMK CLI, `qmk flash -kb tot_he_m -km default -bl
 uf2-split-left` (or `-right`) does the same. To reach the bootloader from the keyboard, hold Esc and press T or Y
-(layer 3), or press Z X C V or M , . / together. `uf2/tot_he_m_first.uf2` is the first build that ran on the board
-(before the calibration, averaging and glitch filtering), kept as a fallback.
+(layer 3). `uf2/tot_he_m_first.uf2` is the first build that ran on the board (before the calibration, averaging and
+glitch filtering), kept as a fallback.
+
+Once a half runs the VIA firmware, `./flash.py` updates it without touching it: it asks each half on USB for its
+side, restarts it into the bootloader over VIA (`id_bootloader_jump`, handled in `he_config.c`) and copies
+`uf2/tot_he_m_via_left.uf2` or `_right.uf2`. Plug in both halves to update both.
 
 ## Wiring test
 
@@ -92,12 +96,12 @@ it as it is, Windows games that only accept XInput need Steam Input or a mapper.
 ## Keymap
 
 `keymaps/default` (and `keymaps/via`, the same layout as VIA's starting point) is the Ferris Sweep ZMK config
-(Triver1/zmk-config) without home-row mods. Layer 0 is QWERTY with Ctrl and Alt on the outer bottom keys, and on the
-thumbs, left to right: Shift, Space, Esc (hold: layer 3) | Enter (hold: layer 2), Backspace (hold: layer 1), GUI.
-Layer 1 has symbols on the top row, digits on the home row and brackets and programming symbols below; layer 2 the
-F-keys, arrows, Home/End, Delete and the modifiers under the left hand; layer 3 the bootloader (T, Y), print screen,
-volume and brightness, and the controller layer toggle (G). Layer-taps decide after 180 ms with permissive hold. I + O
-together is Backspace.
+(Triver1/zmk-config) without home-row mods. Layer 0 is QWERTY with Ctrl and Alt on the outer bottom keys, and on
+the thumbs, left to right: Shift, Space, Esc (hold: layer 3) | Enter (hold: layer 2), Backspace (hold: layer 1),
+GUI. Layer 1 has symbols on the top row, digits on the home row and brackets and programming symbols below; layer 2
+the F-keys, arrows, Home/End, Delete and the modifiers under the left hand; layer 3 the bootloader (T, Y), print
+screen, volume and brightness, and the controller layer toggle (G). Layer-taps decide after 180 ms with permissive
+hold.
 
 ## Settings
 

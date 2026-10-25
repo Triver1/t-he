@@ -39,6 +39,7 @@ enum he_via_value_id {
     id_he_rt_release    = 5,
     id_he_stick_deadzone = 6,
     id_he_stick_full     = 7,
+    id_he_side           = 8,   // read-only, not in the VIA menu: 1 on the left half, 0 on the right, for flashing tools
 };
 
 void he_config_init(void);

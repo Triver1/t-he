@@ -61,6 +61,16 @@ void he_config_task(void) {
 }
 
 #ifdef VIA_ENABLE
+// VIA's id_bootloader_jump, which QMK leaves unhandled: lets the host restart a half into its UF2 bootloader, so
+// new firmware can be flashed without reaching the BOOT button or a QK_BOOT key
+bool via_command_kb(uint8_t *data, uint8_t length) {
+    if (data[0] == id_bootloader_jump) {
+        reset_keyboard();
+        return true;
+    }
+    return false;
+}
+
 static uint8_t *he_config_field(uint8_t value_id) {
     switch (value_id) {
         case id_he_actuation:
@@ -102,6 +112,10 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
             he_config_clamp(&he_config);
             break;
         case id_custom_get_value:
+            if (*value_id == id_he_side) {
+                *value = is_keyboard_left();
+                break;
+            }
             if (!field) {
                 *command_id = id_unhandled;
                 break;
