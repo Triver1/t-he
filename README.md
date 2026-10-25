@@ -9,10 +9,10 @@ spacing, for MX-style magnetic switches (Gateron KS-20 class) and a Seeed XIAO R
 | --- | --- |
 | Shell, 3D printed deck-down, no supports | `case/stl/totemhe_shell_<side>.stl` |
 | Plate with standoffs and the thumb-wing wall, printed top-down, no supports | `case/stl/totemhe_plate_<side>.stl` |
-| PCB, the base of the stack, both halves side by side in one file (placed and netted, to be routed by hand) | `pcb/totem_he.kicad_pcb` (see `pcb/README.md`) |
+| PCB, the base of the stack, both halves side by side in one file, routed | `pcb/totem_he.kicad_pcb` (see `pcb/README.md`) |
 | PCB order files for JLCPCB, written by `pcb/production.sh` after routing | `pcb/production/THE_gerbers.zip` |
 | PCB mock with component blocks for fit tests | `case/stl/totemhe_pcbmock_<side>.stl` |
-| QMK firmware, tables generated from the board | `firmware/`, prebuilt in `firmware/uf2/` |
+| QMK firmware with VIA, rapid trigger and a controller layer, tables generated from the board | `firmware/` (see `firmware/README.md`), prebuilt in `firmware/uf2/` |
 
 Stack: PCB 1.6, plate top 5.0 above the PCB, deck 6.0 above the plate. 12.6 mm tall, 6.6 at the thumb wing.
 The case halves are separate files; the print files are turned over for printing (a rotation, so left stays left).
@@ -33,7 +33,7 @@ The case halves are separate files; the print files are turned over for printing
 | Rubber bumper | 4 or more | 8 or more | Taller than the parts under the PCB (2.5 mm or more) |
 | Shell, printed | 1 | 2 | |
 | Plate, printed | 1 | 2 | |
-| TRRS cable, 4 conductor | | 1 | |
+| TRRS cable, 4 conductor | | 1 | Must be TRRS (three insulating bands on the plug). A 3-conductor TRS cable bridges two jack contacts and shorts the 3.3 V supply: the board stays dark |
 | USB-C cable | | 1 | |
 
 ### Screws
@@ -72,14 +72,20 @@ Compatibility, checked against the datasheets:
 - TRRS: tip VCC (ring 1 tied to it), ring 2 DATA, sleeve GND. One wire carries the link both ways, so both
   halves are wired the same and a turned-over board needs no swap.
 
-## Still to do
+## Firmware
 
-- Firmware: tune actuation on real switches; rapid trigger and VIA settings are not implemented yet.
-- Print the mock and the plate and fit-test them in the shell before ordering boards.
-- Check the routing in KiCad (`pcb/routes.py` has the plan), then run `pcb/production.sh`.
-- Confirm the sensor pinout on one part before ordering 40 of them.
-- Flash the XIAO before final assembly: its BOOTSEL button is unreachable once the plate and shell are on, so
-  keep a `QK_BOOT` key in the keymap.
+QMK on both halves, built by `firmware/build.sh`; flash `firmware/uf2/tot_he_m_via_left.uf2` and
+`tot_he_m_via_right.uf2`. In VIA (definition `firmware/via/tot-he-m.json`) the Hall effect menu sets actuation and
+release as key depth in 0.1 mm, rapid trigger with press and release sensitivity, and the controller layer's stick,
+which turns W A S D into an analog gamepad stick. Each key learns its bottom-out while typing. The keymap follows the
+Ferris Sweep ZMK config. `firmware/README.md` has the details, the wiring test builds and the flashing steps.
+
+## Assembly checks
+
+From the first build: if every sensor reads near 3.3 V in the wiring test (`firmware/uf2/tot_he_m_diag.uf2`), the
+board's ground is not reaching the XIAO's GND pad; if keys come in pairs that always read the same, a select line is
+missing, so reflow the XIAO's D8, D9 and D10 pads. Both were dry joints on the XIAO's castellations, which are easy
+to miss when it is soldered flat. Connect or disconnect the TRRS cable only with USB unplugged.
 
 ## Regenerating
 

@@ -82,16 +82,19 @@ Run these in the KiCad 8 container, and again after routing:
   its mux channel from `mux_map.json`, mux commons, select lines, enable and supply pins, the XIAO and the TRRS.
 - `../firmware/gen_firmware.py` follows every connection the firmware relies on in each half, requires both halves
   on the same XIAO pins, and compares them with `mux_map.json`.
-- `kicad-cli pcb drc --severity-all` currently reports only unconnected items (250, 125 per half), which routing clears.
+- `./r drc` runs KiCad's design rule check on the routed board.
 
 ## Ordering
 
+Two scripts write JLCPCB order files; both run KiCad 8 in Docker and need a clean DRC.
+
 ```bash
-./production.sh
+./gerbers.sh       # both halves joined by snap-off tabs (panel.py), zipped as Tot-HE-m_jlcpcb_gerbers.zip
+./production.sh    # the two halves as they sit in the file, zipped as production/THE_gerbers.zip
 ```
 
-writes Gerbers and an Excellon drill file to `production/files/`, zipped as `production/THE_gerbers.zip`. Run it
-after routing, with DRC clean. An order of 5 gives 5 left and 5 right boards. JLCPCB counts the two outlines as two
+With `gerbers.sh` both halves arrive as one panel, broken apart along the tabs (JLCPCB may still count two
+different boards on a panel as two designs; the quote shows it). With `production.sh` an order of 5 gives 5 left and 5 right boards. JLCPCB counts the two outlines as two
 designs and adds a fee for the second (their help page, "What Counts as Different Designs", gives no amount; the
 quote shows it), so compare the quote with two separate orders. Settings: 2 layers, 1.6 mm FR-4, 1 oz copper; the defaults cover the rest (0.25 mm
 tracks, 0.2 mm clearance, 0.3 mm vias). Choose "Remove order number", or JLCPCB prints one on the silkscreen. The

@@ -10,13 +10,13 @@ learns its full travel the first time it is pressed.
 ./build.sh
 ```
 
-`build.sh` runs `gen_firmware.py`, copies `qmk/the_he` into a QMK checkout (cloned on first run, about 500 MB of
-submodules) and compiles in `ghcr.io/qmk/qmk_cli`. Output: `uf2/the_he_default.uf2`, `uf2/the_he_diag.uf2`.
+`build.sh` runs `gen_firmware.py`, copies `qmk/tot_he_m` into a QMK checkout (cloned on first run, about 500 MB of
+submodules) and compiles in `ghcr.io/qmk/qmk_cli`. Output: `uf2/tot_he_m_default.uf2`, `uf2/tot_he_m_diag.uf2`.
 
 ## Generated from the boards
 
 `gen_firmware.py` reads both halves from `../pcb/totem_he.kicad_pcb` and writes
-`qmk/the_he/he_map.h` (pins, which channels carry a sensor, key names), `qmk/the_he/keyboard.json` (matrix
+`qmk/tot_he_m/he_map.h` (pins, which channels carry a sensor, key names), `qmk/tot_he_m/keyboard.json` (matrix
 size and a layout placed from the board's key positions) and `via/tot-he-m.json` (the same layout for VIA, with
 the actuation menu). It follows each sensor output to its mux channel and
 each mux to a XIAO pin, and stops without writing anything if a connection is unusable:
@@ -32,28 +32,28 @@ Pin data: 74HC4051 from the Nexperia datasheet (rev 12, table 2), XIAO RP2040 fr
 ## Flashing
 
 Hold BOOT while plugging a half in (or double-tap RESET once QMK is on it); the XIAO mounts as the RPI-RP2 drive.
-Drag `uf2/the_he_left.uf2` onto the left half and `uf2/the_he_right.uf2` onto the right: each stores its side on
-first boot, since the board has no handedness pin. With the QMK CLI, `qmk flash -kb the_he -km default -bl
+Drag `uf2/tot_he_m_left.uf2` onto the left half and `uf2/tot_he_m_right.uf2` onto the right: each stores its side on
+first boot, since the board has no handedness pin. With the QMK CLI, `qmk flash -kb tot_he_m -km default -bl
 uf2-split-left` (or `-right`) does the same. To reach the bootloader from the keyboard, hold Esc and press T or Y
-(layer 3), or press Z X C V or M , . / together. `uf2/the_he_first.uf2` is the first build that ran on the board
+(layer 3), or press Z X C V or M , . / together. `uf2/tot_he_m_first.uf2` is the first build that ran on the board
 (before the calibration, averaging and glitch filtering), kept as a fallback.
 
 ## Wiring test
 
-Flash `the_he_diag.uf2` on one half at a time, plug that half in alone, and run `qmk console`. Every five
+Flash `tot_he_m_diag.uf2` on one half at a time, plug that half in alone, and run `qmk console`. Every five
 seconds it prints each sensor's mux, channel, key name, rest reading and a verdict; a sensor that idles near a
 rail (below 150 or above 870 of 1023, where a DRV5055 rests near 512) is flagged, which is how a
 wrong sensor pinout or a dry joint shows up. Pressing a key prints its name, so a key that reports under another
 name has its sensor on the wrong channel.
 
-Without the QMK CLI, flash `the_he_typediag.uf2` instead and focus a text editor with a US (ABC) layout: about
+Without the QMK CLI, flash `tot_he_m_typediag.uf2` instead and focus a text editor with a US (ABC) layout: about
 three seconds after boot it types each sensor's rest reading, noise and verdict, then asks for every key to be
 pressed once and, 45 s later, types each key's lowest and highest reading, swing, press count and the order in
 which presses were detected. The keys send nothing while it runs.
 
 ## VIA
 
-Flash `uf2/the_he_via_left.uf2` and `uf2/the_he_via_right.uf2` (or `the_he_via.uf2` on a half that already knows
+Flash `uf2/tot_he_m_via_left.uf2` and `uf2/tot_he_m_via_right.uf2` (or `tot_he_m_via.uf2` on a half that already knows
 its side). In VIA (usevia.app, in a Chromium-based browser), turn on "Show Design tab" under Settings, load
 `via/tot-he-m.json` in the Design tab, then connect the half that is plugged in. The keymap tab edits all layers;
 the Hall effect tab sets, in 0.1 mm of key travel:
