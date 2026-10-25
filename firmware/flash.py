@@ -3,7 +3,9 @@
 restarts it into the UF2 bootloader (VIA's id_bootloader_jump, handled in he_config.c) and copies the matching
 image onto the RPI-RP2 drive. Needs the VIA firmware already on the half, read-write access to its hidraw device
 (udev rule for 746d:7e57) and udisksctl to mount the drive.
-usage: flash.py [image prefix]   (default uf2/tot_he_m_via, giving tot_he_m_via_left.uf2 and _right.uf2)
+VIA keeps its stored keymap across flashes, so a changed keymap.c only shows after --reset-keymap, which loads the
+compiled keymap into each half afterwards (and drops any keymap edits made in VIA).
+usage: flash.py [--reset-keymap] [image prefix]   (default prefix uf2/tot_he_m_via: tot_he_m_via_left.uf2, _right.uf2)
 """
 import glob
 import os
@@ -14,9 +16,11 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PREFIX = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, 'uf2', 'tot_he_m_via')
+ARGS = [a for a in sys.argv[1:] if a != '--reset-keymap']
+RESET_KEYMAP = '--reset-keymap' in sys.argv[1:]
+PREFIX = ARGS[0] if ARGS else os.path.join(HERE, 'uf2', 'tot_he_m_via')
 VID_PID = '746D:7E57'
-ID_CUSTOM_GET_VALUE, ID_BOOTLOADER_JUMP, ID_HE_SIDE = 0x08, 0x0B, 8
+ID_DYNAMIC_KEYMAP_RESET, ID_CUSTOM_GET_VALUE, ID_BOOTLOADER_JUMP, ID_HE_SIDE = 0x06, 0x08, 0x0B, 8
 
 
 def via_devices():
@@ -89,3 +93,9 @@ while True:
     done.add(side)
 if not done:
     sys.exit('no Tot-HE-m half with VIA firmware found on USB')
+if RESET_KEYMAP:
+    for dev in via_devices():
+        fd = os.open(dev, os.O_RDWR)
+        command(fd, ID_DYNAMIC_KEYMAP_RESET)
+        os.close(fd)
+        print(f'{dev}: keymap reset to the compiled one')

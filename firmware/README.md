@@ -40,7 +40,9 @@ glitch filtering), kept as a fallback.
 
 Once a half runs the VIA firmware, `./flash.py` updates it without touching it: it asks each half on USB for its
 side, restarts it into the bootloader over VIA (`id_bootloader_jump`, handled in `he_config.c`) and copies
-`uf2/tot_he_m_via_left.uf2` or `_right.uf2`. Plug in both halves to update both.
+`uf2/tot_he_m_via_left.uf2` or `_right.uf2`. Plug in both halves to update both. VIA keeps its stored keymap across
+flashes; after a change to `keymap.c`, run `./flash.py --reset-keymap` to load the new one (this drops keymap edits
+made in VIA).
 
 ## Wiring test
 
