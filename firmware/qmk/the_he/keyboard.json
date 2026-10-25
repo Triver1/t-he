@@ -6,7 +6,7 @@
     "bootloader": "rp2040",
     "board": "GENERIC_RP_RP2040",
     "usb": {
-        "vid": "0xFEED",
+        "vid": "0x746D",
         "pid": "0x7E57",
         "device_version": "0.1.0"
     },

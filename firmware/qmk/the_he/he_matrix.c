@@ -3,18 +3,28 @@
 // channels carry a sensor. Scan structure follows Boardloaf-HE (Cipulot / byungyoonc); the polarity-agnostic
 // reading and per-key learned travel follow Hector.
 
+#include <math.h>
 #include "quantum.h"
 #include "analog.h"
 #include "print.h"
 #include "send_string.h"
+#include "he_config.h"
 
 typedef struct {
     uint16_t rest;    // reading with the key up, measured at boot
-    uint16_t travel;  // largest deflection seen so far
+    uint16_t travel;  // full swing in counts, learnt from bottom-outs while typing (learn_travel), 0 until then
+    uint16_t peak;    // deepest deflection of the press under way, from first actuation until the key is back up
+    uint16_t low_min, low_max; // shallowest and deepest of the short presses in a row counted by low_streak
     uint16_t raw;
+    uint16_t stick;   // controller layer: depth in 0.01 mm counted from the edge of the resting noise (he_stick_depth)
+    uint8_t  noise;   // spread of the readings at rest, measured at boot; movement starts beyond it
     uint16_t lo, hi;  // lowest and highest reading since the last report, for the typed self test
+    uint16_t extreme; // rapid trigger: deepest depth while pressed, shallowest since the last release, 0.01 mm
     uint8_t  pending; // scans in a row that disagree with the current state
     bool     pressed;
+    bool     rt_zone; // rapid trigger: actuated since the key last came back above the release point
+    bool     cycle;   // a press is under way: actuated, not yet back above the release point
+    uint8_t  low_streak; // presses in a row that stopped short of the learnt bottom
 } he_key_t;
 
 static const pin_t   row_pins[MATRIX_ROWS / 2] = HE_ROW_PINS;
@@ -58,9 +68,67 @@ static uint16_t deflection(const he_key_t *k) {
     return k->raw > k->rest ? k->raw - k->rest : k->rest - k->raw;
 }
 
+// Key depth from the reading. The field at the sensor goes with the inverse cube of the magnet's distance, so the
+// share of a key's full swing grows slowly at the top of the press and fast at the bottom. depth_lut maps that
+// share, in 64ths, to depth in 0.01 mm, from the travel and bottom-out gap in config.h; filled once at boot.
+static uint16_t depth_lut[65];
+
+static void depth_lut_init(void) {
+    const float top = (HE_GAP_DMM + HE_TRAVEL_DMM) / 10.0f, bottom = HE_GAP_DMM / 10.0f;
+    const float b_top = 1 / (top * top * top), b_bottom = 1 / (bottom * bottom * bottom);
+    for (uint8_t i = 0; i <= 64; i++) {
+        float b      = b_top + (b_bottom - b_top) * i / 64;
+        depth_lut[i] = (uint16_t)((top - cbrtf(1 / b)) * 100 + 0.5f);
+    }
+}
+
+// Bottom-out learning, run when a press ends (the key is back above the release point). A press whose deepest point
+// comes within HE_BOTTOM_PCT of the learnt travel is a bottom-out, and the travel moves 1/HE_TRAVEL_SMOOTHING of the
+// way to it, so it settles on where the key regularly bottoms and one odd press barely moves it. Shorter presses are
+// ignored, unless HE_LOW_STREAK of them come in a row that all stop within HE_LOW_SPREAD_PCT of each other (a weaker
+// magnet, a swapped switch, which bottom out shallower but always at the same spot): then the deepest of them becomes
+// the travel. Partial presses on purpose, typing lightly or steering with the controller layer, vary too much to
+// count. Learnt travel is saved to EEPROM by he_travel_task and loaded at boot by he_travel_load.
+static bool travel_dirty;
+
+static void learn_travel(he_key_t *k) {
+    if (k->peak < HE_MIN_TRAVEL) {
+        return;   // a tap too light to say anything about the bottom
+    }
+    if (!k->travel || k->peak * 100 >= k->travel * HE_BOTTOM_PCT) {
+        k->travel     = k->travel ? k->travel + ((int)k->peak - (int)k->travel) / HE_TRAVEL_SMOOTHING : k->peak;
+        k->low_streak = 0;
+    } else {
+        if (!k->low_streak) {
+            k->low_min = k->low_max = k->peak;
+        }
+        k->low_min = MIN(k->low_min, k->peak);
+        k->low_max = MAX(k->low_max, k->peak);
+        if ((k->low_max - k->low_min) * 100 > k->low_max * HE_LOW_SPREAD_PCT) {
+            k->low_streak = 1;   // too spread to be one bottom: start a new streak from this press
+            k->low_min = k->low_max = k->peak;
+            return;
+        }
+        if (++k->low_streak < HE_LOW_STREAK) {
+            return;
+        }
+        k->travel     = k->low_max;
+        k->low_streak = 0;
+    }
+    travel_dirty = true;
+}
+
+// depth in 0.01 mm of a key deflected by d counts out of a full swing of `travel` counts
+static uint16_t depth(uint16_t d, uint16_t travel) {
+    uint32_t s = MIN((uint32_t)d * 4096 / travel, 4096);
+    uint16_t i = s >> 6, f = s & 63;
+    return i == 64 ? depth_lut[64] : depth_lut[i] + (uint32_t)(depth_lut[i + 1] - depth_lut[i]) * f / 64;
+}
+
 void matrix_init_custom(void) {
     bool left = is_keyboard_left();
     present   = left ? present_left : present_right;
+    depth_lut_init();
     names     = left ? names_left : names_right;
     for (uint8_t i = 0; i < 3; i++) {
         gpio_set_pin_output(sel_pins[i]);
@@ -71,20 +139,26 @@ void matrix_init_custom(void) {
     }
 
     uint32_t sum[MATRIX_ROWS / 2][MATRIX_COLS] = {0};
+    uint16_t lo[MATRIX_ROWS / 2][MATRIX_COLS], hi[MATRIX_ROWS / 2][MATRIX_COLS] = {{0}};
+    memset(lo, 0xFF, sizeof(lo));
     for (uint8_t n = 0; n < HE_CALIBRATION_SAMPLES; n++) {
         for (uint8_t c = 0; c < MATRIX_COLS; c++) {
             select_channel(c);
             for (uint8_t r = 0; r < MATRIX_ROWS / 2; r++) {
-                sum[r][c] += he_read(adc_ch[r]);
+                uint16_t v = he_read(adc_ch[r]);
+                sum[r][c] += v;
+                lo[r][c] = MIN(lo[r][c], v);
+                hi[r][c] = MAX(hi[r][c], v);
             }
         }
         wait_ms(1);
     }
     for (uint8_t r = 0; r < MATRIX_ROWS / 2; r++) {
         for (uint8_t c = 0; c < MATRIX_COLS; c++) {
-            // no assumed travel: a key fires at HE_MIN_ACTUATION until it has been pressed and learns its own
+            // travel 0: HE_ASSUMED_TRAVEL stands in until he_travel_load or a bottom-out sets it
             keys[r][c] = (he_key_t){.rest = sum[r][c] / HE_CALIBRATION_SAMPLES, .lo = 0xFFFF};
-            keys[r][c].raw = keys[r][c].rest;
+            keys[r][c].raw   = keys[r][c].rest;
+            keys[r][c].noise = MIN(MAX(hi[r][c] - lo[r][c], HE_STICK_NOISE_MIN) + 1, HE_STICK_NOISE_MAX);
         }
     }
 }
@@ -103,7 +177,7 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
             k->lo       = MIN(k->lo, k->raw);
             k->hi       = MAX(k->hi, k->raw);
             n++;
-            jumped += deflection(k) >= HE_MIN_ACTUATION;
+            jumped += deflection(k) >= HE_GLITCH_COUNTS;
         }
     }
     // every channel dips at once now and then; a real chord moves a few keys, so a scan where most moved is dropped
@@ -119,13 +193,37 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
             }
             he_key_t *k   = &keys[r][c];
             uint16_t  d   = deflection(k);
-            uint16_t  act = MAX(k->travel * HE_ACTUATION_PCT / 100, HE_MIN_ACTUATION);
-            uint16_t  rel = MAX(k->travel * HE_RELEASE_PCT / 100, HE_MIN_RELEASE);
-            bool      now = k->pressed ? d > rel : d >= act;
-            k->pending    = now != k->pressed ? k->pending + 1 : 0;
+            uint16_t  pos = depth(d, MAX(k->travel ? k->travel : HE_ASSUMED_TRAVEL, d));
+            // the stick's depth is zeroed where the reading leaves the resting noise, so it rises from 0 at the first
+            // movement the sensor can tell apart, and still reaches the bottom at the full swing
+            uint16_t  full = MAX(k->travel ? k->travel : HE_ASSUMED_TRAVEL, d);
+            k->stick       = d > k->noise ? depth(d - k->noise, full - k->noise) : 0;
+            bool      up  = pos <= he_config.release_dmm * 10 || d <= HE_MIN_RELEASE;   // back above the release point
+            bool      now;
+            if (!he_config.rapid_trigger) {
+                now = k->pressed ? !up : pos >= he_config.actuation_dmm * 10 && d >= HE_MIN_ACTUATION;
+            } else {
+                // the first press needs the actuation point; after that the key lets go as soon as it rises by the
+                // release sensitivity from its deepest point, and fires again as soon as it sinks by the press
+                // sensitivity from its shallowest point, until it comes back above the release point
+                if (up) {
+                    k->rt_zone = false;
+                }
+                if (k->pressed) {
+                    k->extreme = MAX(k->extreme, pos);
+                    now        = !up && k->extreme - pos < he_config.rt_release_dmm * 10;
+                } else {
+                    k->extreme = MIN(k->extreme, pos);
+                    now        = k->rt_zone ? pos >= k->extreme + he_config.rt_press_dmm * 10
+                                            : pos >= he_config.actuation_dmm * 10 && d >= HE_MIN_ACTUATION;
+                }
+            }
+            k->pending = now != k->pressed ? k->pending + 1 : 0;
             if (k->pending >= HE_DEBOUNCE_SCANS) {
                 k->pressed = now;
                 k->pending = 0;
+                k->extreme = pos;   // rapid trigger measures the next move from here
+                k->rt_zone |= now;
                 changed    = true;
 #ifdef HE_TYPE_REPORT
                 if (now) {
@@ -137,11 +235,17 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
                 }
 #endif
 #ifdef HE_LOG_KEYS
-                uprintf("%s %s  raw %u rest %u travel %u\n", names[r][c], now ? "down" : "up", k->raw, k->rest, k->travel);
+                uprintf("%s %s  raw %u rest %u travel %u depth %u.%02u mm\n", names[r][c], now ? "down" : "up", k->raw, k->rest, k->travel, pos / 100, pos % 100);
 #endif
             }
-            if (k->pressed && d > k->travel) {
-                k->travel = d;   // learnt only from confirmed presses, so a glitch cannot raise it
+            k->cycle |= k->pressed;
+            if (k->cycle) {
+                k->peak = MAX(k->peak, d);
+                if (up && !k->pressed) {
+                    learn_travel(k);
+                    k->cycle = false;
+                    k->peak  = 0;
+                }
             }
             if (!k->pressed && d < HE_MIN_RELEASE && scans % 64 == 0) {
                 k->rest += k->raw > k->rest ? 1 : k->raw < k->rest ? -1 : 0;   // follows slow drift at rest
@@ -154,6 +258,45 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
         }
     }
     return changed;
+}
+
+// the controller layer's depth in 0.01 mm for the key at matrix position (row, col), counted from the edge of its
+// resting noise; 0 for an empty channel or a key on the other half
+uint16_t he_stick_depth(uint8_t row, uint8_t col) {
+    uint8_t first = is_keyboard_left() ? 0 : MATRIX_ROWS / 2;
+    if (row < first || row >= first + MATRIX_ROWS / 2 || !(present[row - first] & (1 << col))) {
+        return 0;
+    }
+    return keys[row - first][col].stick;
+}
+
+// Learnt travel lives in the keyboard's EEPROM block after he_config_t, one value per matrix position of this half.
+// Loaded from keyboard_post_init_kb, since QMK validates the EEPROM only after matrix_init_custom has run.
+void he_travel_load(void) {
+    uint16_t saved[MATRIX_ROWS / 2][MATRIX_COLS];
+    eeconfig_read_kb_datablock(saved, HE_TRAVEL_OFFSET, sizeof(saved));
+    for (uint8_t r = 0; r < MATRIX_ROWS / 2; r++) {
+        for (uint8_t c = 0; c < MATRIX_COLS; c++) {
+            keys[r][c].travel = saved[r][c] >= HE_MIN_TRAVEL && saved[r][c] <= 1023 ? saved[r][c] : 0;
+        }
+    }
+}
+
+// saves learnt travel at most every HE_TRAVEL_SAVE_MS, and only after a change, to spare the flash
+void he_travel_task(void) {
+    static uint32_t last = 0;
+    if (!travel_dirty || timer_elapsed32(last) < HE_TRAVEL_SAVE_MS) {
+        return;
+    }
+    uint16_t saved[MATRIX_ROWS / 2][MATRIX_COLS];
+    for (uint8_t r = 0; r < MATRIX_ROWS / 2; r++) {
+        for (uint8_t c = 0; c < MATRIX_COLS; c++) {
+            saved[r][c] = keys[r][c].travel;
+        }
+    }
+    eeconfig_update_kb_datablock(saved, HE_TRAVEL_OFFSET, sizeof(saved));
+    travel_dirty = false;
+    last         = timer_read32();
 }
 
 #ifdef HE_TYPE_REPORT
@@ -216,6 +359,9 @@ void housekeeping_task_kb(void) {
             }
         }
     }
+    he_config_task();
+    he_travel_task();
+    he_gamepad_task();
     housekeeping_task_user();
 }
 #else
@@ -250,6 +396,9 @@ void housekeeping_task_kb(void) {
         next = 0;
 #endif
     }
+    he_config_task();
+    he_travel_task();
+    he_gamepad_task();
     housekeeping_task_user();
 }
 #endif

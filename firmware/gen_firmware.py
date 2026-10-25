@@ -227,7 +227,7 @@ kb = {
     'processor': 'RP2040',
     'bootloader': 'rp2040',
     'board': 'GENERIC_RP_RP2040',
-    'usb': {'vid': '0xFEED', 'pid': '0x7E57', 'device_version': '0.1.0'},
+    'usb': {'vid': '0x746D', 'pid': '0x7E57', 'device_version': '0.1.0'},
     'features': {'bootmagic': False, 'extrakey': True, 'mousekey': False, 'nkro': True, 'console': True},
     'matrix_size': {'rows': ROWS * 2, 'cols': COLS},
     'split': {'enabled': True, 'serial': {'driver': 'vendor'},
@@ -236,6 +236,54 @@ kb = {
 }
 json.dump(kb, open(os.path.join(out, 'keyboard.json'), 'w'), indent=4)
 
+# ---- VIA definition: the same layout as KLE rows (one key per row, placed by offsets), plus the actuation menu ----
+# slider limits come from config.h, so VIA offers what he_config.c accepts
+cfg = open(os.path.join(out, 'config.h')).read()
+lim = {k: int(re.search(rf'#define {k} (\d+)', cfg)[1])
+       for k in ('HE_ACTUATION_DMM_MIN', 'HE_ACTUATION_DMM_MAX', 'HE_RELEASE_DMM_MIN', 'HE_HYSTERESIS_DMM',
+                 'HE_RT_DMM_MIN', 'HE_RT_DMM_MAX', 'HE_STICK_DEADZONE_DMM_MIN', 'HE_STICK_DEADZONE_DMM_MAX',
+                 'HE_STICK_RANGE_DMM_MIN', 'HE_TRAVEL_DMM')}
+kle, cur = [], 0.0
+for e in sorted(layout, key=lambda e: (e['y'], e['x'])):
+    kle.append([{'x': e['x'], 'y': round(e['y'] - cur, 2)}, f'{e["matrix"][0]},{e["matrix"][1]}'])
+    cur = e['y'] + 1
+via = {
+    'name': kb['keyboard_name'],
+    'vendorId': kb['usb']['vid'],
+    'productId': kb['usb']['pid'],
+    'matrix': kb['matrix_size'],
+    'keycodes': [],
+    'menus': [{'label': 'Hall effect', 'content': [{'label': 'Actuation', 'content': [
+        {'label': 'Actuation point (0.1 mm)', 'type': 'range',
+         'options': [lim['HE_ACTUATION_DMM_MIN'], lim['HE_ACTUATION_DMM_MAX']], 'content': ['id_he_actuation', 0, 1]},
+        {'label': 'Release point (0.1 mm)', 'type': 'range',
+         'options': [lim['HE_RELEASE_DMM_MIN'], lim['HE_ACTUATION_DMM_MAX'] - lim['HE_HYSTERESIS_DMM']],
+         'content': ['id_he_release', 0, 2]},
+        {'label': 'Rapid trigger', 'type': 'toggle', 'content': ['id_he_rapid_trigger', 0, 3]},
+        {'showIf': '{id_he_rapid_trigger} == 1', 'label': 'Rapid trigger press sensitivity (0.1 mm)', 'type': 'range',
+         'options': [lim['HE_RT_DMM_MIN'], lim['HE_RT_DMM_MAX']], 'content': ['id_he_rt_press', 0, 4]},
+        {'showIf': '{id_he_rapid_trigger} == 1', 'label': 'Rapid trigger release sensitivity (0.1 mm)', 'type': 'range',
+         'options': [lim['HE_RT_DMM_MIN'], lim['HE_RT_DMM_MAX']], 'content': ['id_he_rt_release', 0, 5]},
+    ]}, {'label': 'Controller layer', 'content': [
+        {'label': 'Stick dead zone (0.1 mm, 0: from the first movement)', 'type': 'range',
+         'options': [lim['HE_STICK_DEADZONE_DMM_MIN'], lim['HE_STICK_DEADZONE_DMM_MAX']],
+         'content': ['id_he_stick_deadzone', 0, 6]},
+        {'label': 'Stick full deflection (0.1 mm)', 'type': 'range',
+         'options': [lim['HE_STICK_RANGE_DMM_MIN'], lim['HE_TRAVEL_DMM']],
+         'content': ['id_he_stick_full', 0, 7]},
+    ]}]}],
+    # in the order of the_he.h's keycodes, which start at QK_KB_0
+    'customKeycodes': [
+        {'name': 'Stick up', 'title': 'Analog stick up, by how deep the key is pressed', 'shortName': 'Stk Up'},
+        {'name': 'Stick left', 'title': 'Analog stick left, by how deep the key is pressed', 'shortName': 'Stk Lt'},
+        {'name': 'Stick down', 'title': 'Analog stick down, by how deep the key is pressed', 'shortName': 'Stk Dn'},
+        {'name': 'Stick right', 'title': 'Analog stick right, by how deep the key is pressed', 'shortName': 'Stk Rt'},
+    ],
+    'layouts': {'keymap': kle},
+}
+os.makedirs(os.path.join(HERE, 'via'), exist_ok=True)
+json.dump(via, open(os.path.join(HERE, 'via', 'tot-he-m.json'), 'w'), indent=2)
+
 print(f'rows {L["rows"]}, select {L["sel"]}, split link {L["data"]}')
 for side, h in (('left', L), ('right', R)):
     print(f'{side} matrix (row = mux on D0/D1/D2, column = channel):')
@@ -243,4 +291,4 @@ for side, h in (('left', L), ('right', R)):
         print('   ', ' '.join(f'{next((k for k, v in h["keys"].items() if v == (r, c)), "-"):>13}' for c in range(COLS)))
 for n in notes:
     print('note:', n)
-print('wrote he_map.h and keyboard.json; board matches mux_map.json')
+print('wrote he_map.h, keyboard.json and via/tot-he-m.json; board matches mux_map.json')
