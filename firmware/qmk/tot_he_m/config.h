@@ -3,7 +3,7 @@
 #include "he_map.h"
 
 // split link: one half-duplex wire over the TRRS, its pin set in he_map.h
-// no handedness pin: flash with -bl uf2-split-left / uf2-split-right once per half
+// no handedness pin: each half stores its side on first boot (the via_left / via_right images, INIT_EE_HANDS_*)
 #define EE_HANDS
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 

@@ -1,4 +1,0 @@
-#!/bin/sh
-# Runs route.py in the KiCad container: ./r view, ./r open, ./r track ..., ./r via ..., ./r undo, ./r drc
-cd "$(dirname "$0")"
-PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin" docker run --rm -e BOARD="${BOARD:-totem_he.kicad_pcb}" -v "$PWD":/w -w /w kicad/kicad:8.0 python3 route.py "$@" 2>&1 | grep -vE "requested image|Debug: Adding|memory leak|assert"

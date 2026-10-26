@@ -1,17 +1,11 @@
-# QMK checkout that build.sh clones for compiling (about 700 MB)
+# QMK checkout used to build the firmware
 firmware/qmk_firmware/
-# KiCad per-user and generated files
+# KiCad per-user and backup files
 *.kicad_prl
 *-backups/
 fp-info-cache
 \#auto_saved_files\#
-pcb/production/
-__pycache__/
-.DS_Store
-# Ergogen output and intermediate files, rebuilt by pcb/build.sh
+# Ergogen output
 pcb/out/
-.route_undo/
-# Generated fabrication files and render previews, rebuilt by pcb/gerbers.sh and the OpenSCAD exports
-pcb/gerbers/
-pcb/*_gerbers.zip
-case/stl/*.png
+.DS_Store
+__pycache__/
