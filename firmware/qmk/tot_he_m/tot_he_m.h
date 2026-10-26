@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Tot-HE-m keyboard-level keycodes, included in every keymap through QMK_KEYBOARD_H.
 #pragma once
 

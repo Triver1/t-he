@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Controller layer: keys carrying the STK_* keycodes (tot_he_m.h) in the active layers drive an analog stick from how
 // deep they are pressed, so a light press walks and a full press runs. Each axis is the depth of one key minus the
 // opposite one; it starts at the first movement past the key's resting noise and is full at the full-deflection

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Analog matrix for Tot-HE-m: three 74HC4051 muxes, one per ADC pin, sharing three select lines.
 // Row = mux (ADC pin), column = mux channel. he_map.h, taken from the routed board, says which
 // channels carry a sensor. Scan structure follows Boardloaf-HE (Cipulot / byungyoonc); the polarity-agnostic

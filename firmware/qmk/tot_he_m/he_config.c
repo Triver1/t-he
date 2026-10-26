@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Actuation settings: EEPROM storage, the VIA custom menu, and the split sync. See he_config.h.
 
 #include "quantum.h"

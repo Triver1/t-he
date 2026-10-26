@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Pin and channel map of the routed board (pcb/totem_he.kicad_pcb): which XIAO pins drive the muxes, and which mux
 // channel carries which key on each half.
 #pragma once

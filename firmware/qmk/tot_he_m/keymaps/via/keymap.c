@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 #include QMK_KEYBOARD_H
 
 // Ported from the Ferris Sweep ZMK config (Triver1/zmk-config, cradio.keymap), without its home-row mods: numbers

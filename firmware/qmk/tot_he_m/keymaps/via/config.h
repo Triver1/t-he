@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 #pragma once
 
 // Layer-tap timing from the Sweep config: 180 ms, "balanced", which is QMK's permissive hold

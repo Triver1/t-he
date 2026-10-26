@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Runtime settings for the hall-effect scan: actuation and release depths, rapid trigger and the controller layer's
 // stick, in 0.1 mm. Stored in
 // the keyboard's EEPROM block, adjustable from VIA's custom menu (via_custom_value_command_kb), and sent from the USB

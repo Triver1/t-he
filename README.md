@@ -142,8 +142,15 @@ openscad --enable=roof -D 'part="shell"' -D 'side="left"' -o case/stl/totemhe_sh
 | `case/` | OpenSCAD sources and STLs for the shell, plate and foam mold |
 | `firmware/` | QMK source, prebuilt images and the VIA definition |
 
+## License
+
+The PCB, case and everything else outside `firmware/` are licensed under
+[CC BY-NC-SA 4.0](LICENSE), like TOTEM, which they are derived from: share and adapt them freely for
+non-commercial use, with attribution, under the same license. The firmware in `firmware/` is
+[GPL-2.0-or-later](firmware/LICENSE), like QMK.
+
 ## Credits
 
-Layout and outline from [TOTEM](https://github.com/GEIGEIGEIST/TOTEM) by GEIGEIGEIST (CC BY-NC-SA 4.0), which this
-design follows under the same license. The sensor scan is modelled on Boardloaf-HE, the per-key calibration on
-Hector. Some footprints are adapted from ceoloide's Ergogen footprints (see `pcb/footprints/LICENSE-ceoloide`).
+Layout and outline from [TOTEM](https://github.com/GEIGEIGEIST/TOTEM) by GEIGEIGEIST. The sensor scan is modelled
+on Boardloaf-HE, the per-key calibration on Hector. Some footprints are adapted from ceoloide's Ergogen footprints
+(see `pcb/footprints/LICENSE-ceoloide`).
