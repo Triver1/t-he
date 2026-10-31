@@ -127,6 +127,9 @@ opened often, set `insert = true` in `case/totem_he_case.scad` to use M2 heat-se
 The foam mold casts an optional silicone foam layer between the PCB and the plate, which dampens the sound; the
 instructions are at the top of `case/foam_mold.scad`.
 
+The carry case holds both halves face to face in one frame, with a push-in lid on each side; `case/carry_case.scad`
+explains the parts and the fit test. Measure `keycap_h` and `bumper_h` at the top of that file before printing.
+
 The STLs are in `case/stl`, made from the OpenSCAD sources (OpenSCAD 2025 or newer):
 
 ```bash
@@ -139,7 +142,7 @@ openscad --enable=roof -D 'part="shell"' -D 'side="left"' -o case/stl/totemhe_sh
 | --- | --- |
 | `pcb/` | KiCad project with both halves, and the Ergogen config and footprints the board layout was generated from |
 | `production/` | Gerbers for JLCPCB and the LCSC BOM |
-| `case/` | OpenSCAD sources and STLs for the shell, plate and foam mold |
+| `case/` | OpenSCAD sources and STLs for the shell, plate, foam mold and carry case |
 | `firmware/` | QMK source, prebuilt images and the VIA definition |
 
 ## License
