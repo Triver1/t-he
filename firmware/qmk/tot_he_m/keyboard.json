@@ -25,11 +25,6 @@
         "enabled": true,
         "serial": {
             "driver": "vendor"
-        },
-        "transport": {
-            "sync": {
-                "matrix_state": true
-            }
         }
     },
     "layouts": {
