@@ -1,13 +1,11 @@
-// Two-part mold for the silicone foam layer between the PCB and the switch plate, cast from expanding silicone
-// foam (e.g. Smooth-On Soma Foama). The base is a tray in the foam's outline with an island for every hole the foam
-// needs: each switch housing (with notches for its plate clips), the four standoffs, the XIAO window and the TRRS
-// jack. The lid rests on the islands, so the holes come out clean and the foam exactly foam_t thick; the foam's
-// overflow leaves through the vents. Pins on the standoff islands locate the lid.
-// Pour the mixed foam into the base, put the lid on, clamp or weigh it down, let it cure, then trim the vent sprues.
-// Export: openscad -D 'part="none"' -D 'mold="base"' -D 'side="left"' -o stl/totemhe_foam_mold_base_left.stl foam_mold.scad
-//         openscad -D 'part="none"' -D 'mold="lid"'  -D 'side="left"' -o stl/totemhe_foam_mold_lid_left.stl foam_mold.scad
+// Open mold for the silicone foam layer between the PCB and the switch plate, cast from expanding silicone foam (e.g.
+// Smooth-On Soma Foama): the foam's inverse and nothing more. A floor under the foam only, and thin walls around its
+// outline and around every hole it needs (each switch housing with notches for its plate clips, the four standoffs,
+// the XIAO window and the TRRS jack), all foam_t tall; inside the holes there is no floor at all.
+// Pour the mixed foam in, let it rise and cure, then slice it flush with the wall tops using a long blade.
+// Export: openscad -D 'part="none"' -D 'mold="mold"' -D 'side="left"' -o stl/totemhe_foam_mold_left.stl foam_mold.scad
 side = "left";
-mold = "base";       // "base" | "lid" | "foam" (the cast piece, for checking) | "assembly"
+mold = "mold";       // "mold" | "foam" (the cast piece, for checking) | "assembly"
 include <totem_he_case.scad>
 
 /* [Foam] */
@@ -22,13 +20,8 @@ standoff_hole = standoff_d + 0.8;
 min_web     = 0.8;
 
 /* [Mold] */
-floor_t   = 2.0;
-mold_wall = 6.0;
-lid_t     = 4.0;
-pin_d     = 2.4;
-pin_h     = 3.0;
-vent_d    = 2.0;
-vent_pitch = 14.0;
+floor_t = 1.0;
+wall_t  = 1.2;   // three 0.4 mm extrusion widths
 
 module switch_hole2d() {
   square(sw_hole, center = true);
@@ -46,34 +39,16 @@ module foam2d() {
   }
 }
 
-module base() {
-  difference() {
-    linear_extrude(floor_t + foam_t) offset(delta = mold_wall) outline2d();
-    translate([0, 0, floor_t]) linear_extrude(foam_t + 1) foam2d();
-  }
-  for (h = totem_holes) translate([h[0], h[1], floor_t + foam_t - eps]) cylinder(d = pin_d, h = pin_h);
-}
-module vents2d() {
-  intersection() {
-    offset(delta = -1) foam2d();
-    for (x = [-10 : vent_pitch : 160], y = [-120 : vent_pitch : 10]) translate([x, y]) circle(d = vent_d);
-  }
-}
-module lid() {
-  difference() {
-    linear_extrude(lid_t) offset(delta = mold_wall) outline2d();
-    translate([0, 0, -1]) linear_extrude(lid_t + 2) vents2d();
-    for (h = totem_holes) translate([h[0], h[1], -1]) cylinder(d = pin_d + 0.4, h = lid_t + 2);
-  }
+module mold() {
+  linear_extrude(floor_t) offset(delta = wall_t) foam2d();
+  linear_extrude(floor_t + foam_t) difference() { offset(delta = wall_t) foam2d(); foam2d(); }
 }
 
 side_mirror() {
-  if (mold == "base") base();
-  else if (mold == "lid") lid();                            // prints as it is, flat side down
+  if (mold == "mold") mold();
   else if (mold == "foam") linear_extrude(foam_t) foam2d();
   else {
-    color("#8a8a8e") base();
+    color("#8a8a8e") mold();
     color("#e8e2d0", 0.6) translate([0, 0, floor_t]) linear_extrude(foam_t) foam2d();
-    color("#4a6fa5", 0.5) translate([0, 0, floor_t + foam_t + 8]) lid();
   }
 }
