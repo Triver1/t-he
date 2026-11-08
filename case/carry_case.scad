@@ -1,23 +1,26 @@
-// Carrying case: a frame shaped like the keyboard outline, open at both faces, with a push-in lid on each.
+// Carrying case: a frame shaped like the keyboard outline, open at both faces, with a hinged lid on each.
 // The left half goes in from below keycaps-up, the right half from above upside down; turned over, the right half's
 // outline is the left's, so one pocket fits both. A ledge runs around the main block's deck: each half's deck chamfer
 // seats against a 45 degree wedge, the two wedges mirrored about the frame's mid height so both halves centre
 // themselves, and the keycaps reach through the opening to face each other gap_t apart, whichever way the case is
-// held. A lip under each lid plugs into the frame in the space below the half, clear of its feet; ribs on the lip
-// squash against the wall to hold the lid, and a fingernail slot at each side lifts it off. Closed, the lid compresses
-// the half's rubber feet by squeeze against the wedge. The top lid is engraved with the name, the bottom one with the
-// cat. The frame prints upright as modelled, the lids outside face down; no supports.
-// Fit test: case_part="fit_test" prints three corners of a lid, one per lip_clear in fit_clears; try them on the
-// frame's top tab, then set lip_clear to the one that grips.
-// Texture: export lid2d() as an SVG, then run wall_waves.py outline.svg wall_waves.scad
+// held. Each lid hangs on two lift-off hinges, far apart along the top long edge so a knock on the lid loads them
+// little: a printed bar between two frame knuckles, and a hook on the lid whose slot opens towards the lid's outer
+// face. Closed, the slot faces away from the frame, so the lid cannot come off; opened to about 90 degrees, the hook
+// slides sideways off the bar. Nothing flexes and there is no separate pin. The hinge axis runs outside the edge's
+// middle tab, so no part of the lid swings into the frame. A lip under the lid locates it in
+// the frame, in the space below the half and clear of its feet, and stops short of the hinge side, where it would hit
+// the wall as the lid swings. On the straight run of the thumb side a ridge on the lip clicks into a groove in the
+// wall: the wall flexes along its layers to let it pass, and a fingernail slot over it lifts the lid. Closed, the lid compresses the half's rubber feet by squeeze
+// against the wedge. The top lid is engraved with the name, the bottom one with the cat.
+// The frame prints upright as modelled, the lids outside face down; no supports.
+// Texture: export lid2d() as an SVG, then run wall_texture.py outline.svg wall_texture.scad
 // Export: openscad --enable=roof -D 'part="none"' -D 'case_part="frame"'      -o stl/totemhe_carry_frame.stl carry_case.scad
 //         openscad --enable=roof -D 'part="none"' -D 'case_part="lid_top"'    -o stl/totemhe_carry_lid_top.stl carry_case.scad
 //         openscad --enable=roof -D 'part="none"' -D 'case_part="lid_bottom"' -o stl/totemhe_carry_lid_bottom.stl carry_case.scad
-//         openscad --enable=roof -D 'part="none"' -D 'case_part="fit_test"'   -o stl/totemhe_carry_fit_test.stl carry_case.scad
-case_part = "assembly";   // "frame" | "lid_top" | "lid_bottom" | "fit_test" | "assembly"
+case_part = "assembly";   // "frame" | "lid_top" | "lid_bottom" | "assembly"
 include <totem_he_case.scad>
 use <cat.scad>
-use <wall_waves.scad>
+use <wall_texture.scad>
 
 /* [Keyboard] */
 bumper_h = 3.0;    // rubber feet under the PCB
@@ -33,19 +36,29 @@ wedge_r    = 2.4;   // reach of the upper wedge, which needs a 45 degree face on
 wall_t     = 2.4;
 lid_t      = 2.0;
 engrave    = 0.6;
-texture    = true;   // thin wave lines on the outside, from wall_waves.py
+texture    = true;   // faceted scales on the outside, from wall_texture.py
 
-/* [Lid lip] */
+/* [Lid lip and latch] */
 lip_clear  = 0.15;              // lip to frame wall
 lip_h      = 2.5;               // stops short of the half's underside, z_feet
 lip_t      = 1.5;
 lead_in    = 0.3;               // the lip's tip is this much narrower, to find the opening
-rib_h      = 0.25;              // past lip_clear, so a rib squashes rib_h - lip_clear against the wall
-rib_w      = 1.0;
-rib_pitch  = 20;
-slot_h     = 0.8;               // fingernail slot in the lid's inner face
-slot_y     = [-38, -22];
-fit_clears = [0.10, 0.15, 0.20];
+latch_x    = [61, 77];          // along the thumb side's straight run, opposite the middle of the hinges
+latch_edge = -91.83;            // that run's pocket edge, y
+latch_h    = 0.5;               // the ridge stands this far out of the lip; the wall gives latch_h - lip_clear
+latch_z    = 1.3;               // its peak, above the lid's inner face
+groove_d   = 0.6;
+slot_h     = 0.8;               // fingernail slot in the lid's inner face, over the latch
+
+/* [Hinges] */
+hinge_x    = [12, 107];         // start of each hinge, on the top edge's straight runs either side of the tab
+hinge_wall = 0.94;              // the frame's outer face along those runs, y
+hinge_len  = 20;
+knuckle_r  = 2.5;
+knuckle_gap = 0.4;              // between the hook and the frame knuckles either side of it
+bar_d      = 3.2;               // the frame's bar, which the lid's hook turns on
+hook_clear = 0.2;
+hook_r     = 4.0;               // around the bar, so the hook's two arms beside the slot stay over 2 mm thick
 
 z_feet  = bumper_h - squeeze;                               // lower half's PCB bottom above the bottom face
 z_deck1 = z_feet + z_top;                                   // lower half's deck, facing up
@@ -57,6 +70,8 @@ z_slope = z_deck1 - chamfer - fit;                          // the lower band's 
 module footprint2d() union() { outline2d(); wing_tucked2d(); }
 module pocket2d() offset(delta = fit) footprint2d();
 module lid2d() offset(r = wall_t) pocket2d();
+axis = [6.61 + knuckle_gap + knuckle_r, knuckle_r];          // hinge axis, y and z in the face's own frame below; past
+                                                              // the lid's top tab (y 6.61)
 // over the deck only: clear of the keycap pockets and of the thumb wing, which sits lower at plate level
 module ledge2d() offset(delta = 0.8) offset(delta = -0.8) difference() {
   pocket2d();
@@ -79,40 +94,67 @@ module wedge_upper() {
   }
 }
 
-module frame() difference() {
+// Hinges and latch are drawn for the bottom face, where the frame is z >= 0 and the lid z <= 0; at_faces() repeats
+// them mirrored for the top face.
+module at_faces() { children(); translate([0, 0, frame_h]) mirror([0, 0, 1]) children(); }
+// a profile in y and z, swept along x from x0 to x1
+module along_x(x0, x1) translate([x0, 0, 0]) rotate([90, 0, 90]) linear_extrude(x1 - x0) children();
+function third(i) = [(hinge_len + 2 * knuckle_gap) / 3 * i, (hinge_len + 2 * knuckle_gap) / 3 * (i + 1) - knuckle_gap];
+// tangent to the face, joined to the wall by a 45 degree web on the side away from the face
+module frame_knuckle2d() hull() {
+  translate(axis) circle(knuckle_r, $fn = 36);
+  translate([hinge_wall - 1, 0]) square([1, axis[1] + knuckle_r + (axis[0] - hinge_wall)]);
+}
+// a column from the lid's outer face up around the bar, joined to the lid's edge; the seat has a pointed top so it
+// prints without supports, and the slot runs from it out through the outer face
+module lid_hook2d() difference() {
   union() {
-    linear_extrude(frame_h) difference() { lid2d(); pocket2d(); }
-    wedge_lower();
-    wedge_upper();
+    hull() { translate(axis) circle(hook_r, $fn = 48); translate([axis[0] - hook_r, -lid_t]) square([2 * hook_r, 0.01]); }
+    translate([hinge_wall - 1, -lid_t]) square([axis[0] - hinge_wall + 1, lid_t]);
   }
-  if (texture) wall_waves();
+  r = bar_d / 2 + hook_clear;
+  translate(axis) hull() { circle(r, $fn = 36); translate([0, r * sqrt(2)]) circle(0.01); }
+  translate([axis[0] - r, -lid_t - 1]) square([2 * r, axis[1] + lid_t + 1]);
+}
+module frame_hinges() for (x = hinge_x) {
+  for (i = [0, 2]) along_x(x + third(i)[0], x + third(i)[1]) frame_knuckle2d();
+  along_x(x + third(0)[1] - 1, x + third(2)[0] + 1) translate(axis) circle(d = bar_d, $fn = 36);
+}
+module lid_hinges() for (x = hinge_x) along_x(x + third(1)[0], x + third(1)[1]) lid_hook2d();
+module groove() along_x(latch_x[0] - 1, latch_x[1] + 1)
+  polygon([[latch_edge + eps, latch_z - groove_d], [latch_edge - groove_d, latch_z], [latch_edge + eps, latch_z + groove_d]]);
+
+module frame() union() {
+  difference() {
+    union() {
+      linear_extrude(frame_h) difference() { lid2d(); pocket2d(); }
+      wedge_lower();
+      wedge_upper();
+    }
+    if (texture) wall_texture();
+    at_faces() groove();
+  }
+  at_faces() frame_hinges();
 }
 
-// diagonal stripes cut the ribs out of a ring around the lip, so every wall gets some whatever its direction
-// the extra stripe gives the two short walls of the frame's top tab a rib each, for the fit test
-module rib_stripes2d() {
-  rotate(37) for (i = [-20 : 20]) translate([i * rib_pitch, -300]) square([rib_w, 600]);
-  translate([-300, 0]) square([600, rib_w]);
-}
-// rises from z 0, the lid's inner face
-module lip(clear) {
-  linear_extrude(lip_h - lead_in) difference() { offset(delta = -clear) pocket2d(); offset(delta = -clear - lip_t) pocket2d(); }
-  translate([0, 0, lip_h - lead_in]) linear_extrude(lead_in) difference() { offset(delta = -clear - lead_in) pocket2d(); offset(delta = -clear - lip_t) pocket2d(); }
-  linear_extrude(lip_h - lead_in - 0.4) intersection() {
-    difference() { offset(delta = rib_h - clear) pocket2d(); offset(delta = -clear - 0.1) pocket2d(); }
-    rib_stripes2d();
+// rises from z 0, the lid's inner face; cut back on the hinge side, where it would swing into the wall
+module lip(clear) intersection() {
+  union() {
+    linear_extrude(lip_h - lead_in) difference() { offset(delta = -clear) pocket2d(); offset(delta = -clear - lip_t) pocket2d(); }
+    translate([0, 0, lip_h - lead_in]) linear_extrude(lead_in) difference() { offset(delta = -clear - lead_in) pocket2d(); offset(delta = -clear - lip_t) pocket2d(); }
+    along_x(latch_x[0], latch_x[1]) polygon([[latch_edge + clear + 0.2, latch_z - latch_h], [latch_edge + clear - latch_h, latch_z], [latch_edge + clear + 0.2, latch_z + latch_h]]);
   }
+  translate([-50, -200, -1]) cube([300, axis[0] - 15 + 200, lip_h + 2]);
 }
-// across the wall on both long sides, stopping short of the pocket so the lip stays whole
-module nail_slots() for (x = [[inner_x() + fit + 0.8, inner_x() + fit + wall_t + 1], [-2, 8.2 - fit - 0.8]])
-  translate([x[0], slot_y[0], -slot_h]) cube([x[1] - x[0], slot_y[1] - slot_y[0], slot_h + eps]);
+module nail_slot() translate([latch_x[0], latch_edge - wall_t - 2, -slot_h]) cube([latch_x[1] - latch_x[0], wall_t + 2 - 0.8, slot_h + eps]);
 // inner face at z 0, lip upwards, outer face at -lid_t; lid() turns it to fit each face of the frame
-module lid_body(clear = lip_clear) {
+module lid_body() {
   difference() {
     translate([0, 0, -lid_t]) linear_extrude(lid_t) lid2d();
-    nail_slots();
+    nail_slot();
   }
-  lip(clear);
+  lip(lip_clear);
+  lid_hinges();
 }
 module lid(top) difference() {
   translate([0, 0, top ? frame_h : 0]) mirror([0, 0, top ? 1 : 0]) lid_body();
@@ -126,8 +168,4 @@ module lid_art(top) translate([66, 0]) if (top) {
 if (case_part == "frame") frame();
 else if (case_part == "lid_top") rotate([180, 0, 0]) translate([0, 0, -frame_h - lid_t]) lid(true);
 else if (case_part == "lid_bottom") translate([0, 0, lid_t]) lid(false);
-else if (case_part == "fit_test") for (i = [0 : len(fit_clears) - 1]) translate([0, i * 22, lid_t]) difference() {
-  intersection() { lid_body(fit_clears[i]); translate([48, -10, -lid_t - 1]) cube([41, 19, 10]); }
-  translate([68, -5, -lid_t - eps]) linear_extrude(engrave + eps) mirror([1, 0, 0]) text(str(round(fit_clears[i] * 100)), size = 5, font = "DejaVu Sans:style=Bold", halign = "center", valign = "center");
-}
 else if (case_part == "assembly") { color("#6a5acd") frame(); color("#8a7ae0") { lid(true); lid(false); } }
